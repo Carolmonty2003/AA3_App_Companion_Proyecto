@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "310814606778",
+    "project_id": "aa3appcompanionvalorant",
+    "storage_bucket": "aa3appcompanionvalorant.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310814606778:android:ec7c39ea540b72330fc983",
+        "android_client_info": {
+          "package_name": "com.example.valorant_companion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDujQXzYXcD7Fm0uL-g9ygXoIZlNB61VmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
