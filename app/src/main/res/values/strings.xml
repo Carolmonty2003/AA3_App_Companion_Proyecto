@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Valorant_Companion</string>
+    <string name="app_version">V1</string>
 </resources>
