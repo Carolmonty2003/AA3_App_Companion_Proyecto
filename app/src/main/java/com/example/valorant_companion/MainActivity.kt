@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             LoginSuccess(account)
         } ?: run {
             Log.d("Login Google", "No hay sesion iniciada")
-            findViewById<SignInButton>(R.id.btn_login_google).setOnClickListener{signIn()}
+            findViewById<SignInButton>(R.id.btn_login_google).setOnClickListener{SignIn()}
         }
 
         googleSignInClient.signOut().addOnCompleteListener(this){
@@ -83,10 +83,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun Login(){
+        val email = emailField.text.toString()
+        val password = passwordField.text.toString()
 
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if(task.isSuccessful){
+                    val user = auth.currentUser //obtiene usuario actual
+                    val userId = user?.uid //obtiene el ID del usuario
+
+
+                    Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, ProfileActivity::class.java).apply{
+                        //putExtra("USER_NAME", userName)
+                        //putExtra("USER_IMAGE", userImage.toString())
+                    }
+                }
+                else{
+                    Toast.makeText(this, "Error en el inicio de sesión: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
-    private fun signIn(){
+    private fun SignIn(){
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, 9001)
     }

@@ -4,15 +4,13 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInApi
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.Api.Client
+import com.google.firebase.auth.FirebaseAuth
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -22,6 +20,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var userName: TextView
     private lateinit var profileImage: ImageView
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +36,7 @@ class ProfileActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        findViewById<Button>(R.id.signOutButton).setOnClickListener{ signOut() }
+        findViewById<Button>(R.id.signOutButton).setOnClickListener{ SignOut() }
 
         userName.text = intent.getStringExtra( "USER_NAME")
 
@@ -46,10 +45,11 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun signOut(){
+    private fun SignOut(){
         val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+        auth.signOut()
     }
 
     private fun loadImage(urlString: String){
