@@ -114,18 +114,28 @@ class MainActivity : AppCompatActivity() {
         val email = emailField.text.toString()
         val password = passwordField.text.toString()
 
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Por favor, ingrese email y contraseña.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if(task.isSuccessful){
-                    val user = auth.currentUser //obtiene usuario actual
-                    val userId = user?.uid //obtiene el ID del usuario
+                    val user = auth.currentUser
 
+                    // 1. Obtener el email para usarlo como nombre, como se ha solicitado.
+                    val userName = user?.email ?: "Usuario desconocido"
 
-                    Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+                    // 2. Obtener la URL de la foto (será null/vacía para cuentas de email/password)
+                    // Esto hará que ProfileActivity cargue la imagen por defecto.
+                    val userImageUri = user?.photoUrl?.toString() ?: ""
+
                     val intent = Intent(this, ProfileActivity::class.java).apply{
-                        //putExtra("USER_NAME", userName)
-                        //putExtra("USER_IMAGE", userImage.toString())
+                        putExtra("USER_NAME", userName)
+                        putExtra("USER_IMAGE", userImageUri)
                     }
+                    startActivity(intent)
                 }
                 else{
                     Toast.makeText(this, "Error en el inicio de sesión: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
@@ -139,11 +149,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun LoginSuccess(account: GoogleSignInAccount){
+        // Google proporciona el displayName y el photoUrl directamente.
         val userName = account.displayName
         val userImage = account.photoUrl
 
         val intent = Intent(this, ProfileActivity::class.java).apply{
             putExtra("USER_NAME", userName)
+            // La URL de Google se pasa como string para que ProfileActivity la descargue
             putExtra("USER_IMAGE", userImage.toString())
         }
         startActivity(intent)
