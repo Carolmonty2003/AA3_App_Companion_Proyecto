@@ -2,6 +2,7 @@ package com.example.valorant_companion
 
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -40,8 +41,24 @@ class ProfileActivity : AppCompatActivity() {
 
         userName.text = intent.getStringExtra( "USER_NAME")
 
-        intent.getStringExtra("USER_IMAGE")?.let{
-            loadImage(it)
+        val defaultImageResId = R.drawable.ic_launcher_foreground
+
+        intent.getStringExtra("USER_IMAGE")?.let { uriOrUrlString ->
+            if (uriOrUrlString.isEmpty()) {
+                // Caso String vacío (Usuario no seleccionó imagen en RegisterFragment)
+                profileImage.setImageResource(defaultImageResId)
+            }
+            // Caso URI local (Usuario seleccionó imagen en RegisterFragment)
+            else if (uriOrUrlString.startsWith("content://") || uriOrUrlString.startsWith("file://")) {
+                profileImage.setImageURI(Uri.parse(uriOrUrlString))
+            }
+            // Caso URL remota (ej. Google Sign-In, u otra URL)
+            else {
+                loadImage(uriOrUrlString)
+            }
+        } ?: run {
+            // Caso 'USER_IMAGE' es nulo (seguro de error)
+            profileImage.setImageResource(defaultImageResId)
         }
     }
 

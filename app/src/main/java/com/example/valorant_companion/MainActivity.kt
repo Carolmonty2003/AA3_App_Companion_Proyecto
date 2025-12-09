@@ -3,6 +3,7 @@ package com.example.valorant_companion
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -38,8 +39,15 @@ class MainActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        findViewById<Button>(R.id.btn_register).setOnClickListener{Register()}
+        // Cargar el listener del back stack
+        supportFragmentManager.addOnBackStackChangedListener {
+            // Aquí defines la función anónima (el listener)
+            updateLayoutVisibility()
+        }
+
         findViewById<Button>(R.id.btn_login).setOnClickListener{Login()}
+        //findViewById<Button>(R.id.btn_register).setOnClickListener{Register()}
+        findViewById<Button>(R.id.btn_register).setOnClickListener{ loadRegisterFragment() }
 
         //inicio sesion google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -67,19 +75,39 @@ class MainActivity : AppCompatActivity() {
         //inicio sesion con otros...
     }
 
-    private fun Register(){
-        val email = emailField.text.toString()
-        val password = passwordField.text.toString()
+    // Función para manejar la visibilidad del layout
+    private fun updateLayoutVisibility() {
+        val fragmentContainer = findViewById<View>(R.id.fragment_container_view)
+        val mainLoginLayout = findViewById<View>(R.id.main_login_layout)
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if(task.isSuccessful){
-                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    Toast.makeText(this, "Error en el registro: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
+        // Si hay entradas en el back stack (el fragment está abierto)
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            mainLoginLayout.visibility = View.GONE
+            fragmentContainer.visibility = View.VISIBLE
+        } else {
+            // Si no hay entradas (el fragment se ha cerrado)
+            mainLoginLayout.visibility = View.VISIBLE
+            fragmentContainer.visibility = View.GONE
+        }
+    }
+
+    // Función para cargar el RegisterFragment
+    private fun loadRegisterFragment(){
+        // Al cargar el fragment, NO necesitas cambiar la visibilidad aquí
+        // La cambiaremos al hacer el commit, que dispara el listener.
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, RegisterFragment())
+            .addToBackStack(null) // Esto es CRÍTICO para que popBackStack funcione
+            .commit()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            super.onBackPressed() // Permite que el fragment se cierre
+        } else {
+            super.onBackPressed() // Sale de la actividad
+        }
     }
 
     private fun Login(){
