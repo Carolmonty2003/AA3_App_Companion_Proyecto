@@ -1,49 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkBluePers"
     tools:context=".MainActivity">
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:elevation="10dp"
+        android:visibility="gone"
         tools:layout="@layout/fragment_register" />
 
     <LinearLayout
         android:id="@+id/main_login_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
-        android:padding="10dp">
+        android:orientation="vertical"
+        android:padding="50dp">
+
+        <ImageView
+            android:id="@+id/ic_logo_splash"
+            android:layout_width="wrap_content"
+            android:layout_height="266dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_logo" />
 
         <EditText
             android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
-            android:layout_marginBottom="16dp"/>
+            android:textColorHint="@color/white" />
 
         <EditText
             android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:layout_marginBottom="24dp"/>
+            android:textColorHint="@color/white" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/darkRedPers"
             android:text="Login" />
 
         <Button
@@ -51,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/darkRedPers"
             android:text="Register" />
 
         <com.google.android.gms.common.SignInButton
