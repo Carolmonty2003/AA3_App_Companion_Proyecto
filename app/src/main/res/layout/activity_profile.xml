@@ -5,30 +5,44 @@
     android:id="@+id/Profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
     android:layout_gravity="center"
+    android:background="@color/darkBluePers"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ProfileActivity">
 
-
-    <ImageView
-        android:id="@+id/profileImage"
-        android:layout_width="match_parent"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="32dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
+        app:strokeColor="@color/darkRedPers"
+        app:strokeWidth="2dp">
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@drawable/ic_launcher_foreground" />
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/signOutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Out" />
+        android:backgroundTint="@color/darkRedPers"
+        android:text="Sign Out"
+        />
 
 
 </LinearLayout>
