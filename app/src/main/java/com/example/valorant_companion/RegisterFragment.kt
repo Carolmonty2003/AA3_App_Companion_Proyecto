@@ -25,7 +25,6 @@ class RegisterFragment : Fragment() {
     private lateinit var profileImage: ImageView
     private var selectedImageUri: Uri? = null
 
-    // Launcher para seleccionar una imagen de la galería
     private val selectImageLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
@@ -37,8 +36,7 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflar el layout para este fragment
+    ): View {
         val view = inflater.inflate(R.layout.fragment_register, container, false)
 
         auth = FirebaseAuth.getInstance()
@@ -47,20 +45,11 @@ class RegisterFragment : Fragment() {
         usernameField = view.findViewById(R.id.input_register_username)
         profileImage = view.findViewById(R.id.image_register_profile)
 
-        // Botón para seleccionar imagen
-        profileImage.setOnClickListener {
-            selectImageLauncher.launch("image/*")
-        }
+        profileImage.setOnClickListener { selectImageLauncher.launch("image/*") }
 
-        // Botón para completar el registro
-        view.findViewById<Button>(R.id.btn_fragment_register).setOnClickListener {
-            registerUser()
-        }
+        view.findViewById<Button>(R.id.btn_fragment_register).setOnClickListener { registerUser() }
 
-        // Botón para volver a la pantalla de inicio/login
         view.findViewById<Button>(R.id.btn_fragment_cancel).setOnClickListener {
-            // Usa popBackStack para cerrar el fragment.
-            // Esto dispara el OnBackStackChangedListener en MainActivity.
             activity?.supportFragmentManager?.popBackStack()
         }
 
@@ -77,26 +66,25 @@ class RegisterFragment : Fragment() {
             return
         }
 
-        // 1. Registro en Firebase Auth
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
 
-                    // TODO: Aquí se debería implementar la subida de la imagen y guardar el nombre de usuario
-                    // Por simplicidad, pasaremos el URI de la imagen seleccionada y el nombre de usuario
-                    // al ProfileActivity directamente.
-
-                    val intent = Intent(activity, ProfileActivity::class.java).apply {
+                    startActivity(Intent(requireContext(), MainActivity::class.java).apply {
                         putExtra("USER_NAME", username)
-                        // Usa el URI de la imagen seleccionada, o un placeholder si no hay
                         putExtra("USER_IMAGE", selectedImageUri?.toString() ?: "")
-                    }
-                    startActivity(intent)
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    })
+                    requireActivity().finish()
 
                 } else {
                     Log.e("RegisterFragment", "Error en el registro: ${task.exception?.message}")
-                    Toast.makeText(context, "Error en el registro: ${task.exception?.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context,
+                        "Error en el registro: ${task.exception?.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
     }

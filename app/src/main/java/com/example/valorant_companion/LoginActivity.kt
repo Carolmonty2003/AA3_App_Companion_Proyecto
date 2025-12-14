@@ -17,7 +17,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var button: Button
+
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var emailField: EditText
     private lateinit var passwordField: EditText
@@ -27,29 +27,19 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //button = findViewById(R.id.button)
-        /*button.setOnClickListener {
-            val intent = Intent(this, SplashScreenActivity::class.java)
-            startActivity(intent)
-        }*/
-
-        //inicio sesion normal
+        // Inicio sesión normal
         emailField = findViewById(R.id.input_email)
         passwordField = findViewById(R.id.input_password)
-
         auth = FirebaseAuth.getInstance()
 
-        // Cargar el listener del back stack
-        supportFragmentManager.addOnBackStackChangedListener {
-            // Aquí defines la función anónima (el listener)
-            updateLayoutVisibility()
-        }
+        // Listener del back stack para mostrar/ocultar el fragment de register
+        supportFragmentManager.addOnBackStackChangedListener { updateLayoutVisibility() }
+        updateLayoutVisibility()
 
-        findViewById<Button>(R.id.btn_login).setOnClickListener{Login()}
-        //findViewById<Button>(R.id.btn_register).setOnClickListener{Register()}
-        findViewById<Button>(R.id.btn_register).setOnClickListener{ loadRegisterFragment() }
+        findViewById<Button>(R.id.btn_login).setOnClickListener { Login() }
+        findViewById<Button>(R.id.btn_register).setOnClickListener { loadRegisterFragment() }
 
-        //inicio sesion google
+        // Inicio sesión Google
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("310814606778-9l743rkti6f3eq78h75aai6uaj94fvu7.apps.googleusercontent.com")
             .requestEmail()
@@ -58,65 +48,51 @@ class LoginActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         val account = GoogleSignIn.getLastSignedInAccount(this)
-
-        account?.let{
-            //Log.d("Login Google", "Ya se ha robado la info de: " + account.displayName + "anteriorimente")
-            //startActivity(Intent(this, ProfileActivity::class.java))
-            LoginSuccess(account)
+        account?.let {
+            // Si ya hay cuenta Google, entra directo
+            LoginSuccess(it)
         } ?: run {
-            Log.d("Login Google", "No hay sesion iniciada")
-            findViewById<SignInButton>(R.id.btn_login_google).setOnClickListener{SignIn()}
+            Log.d("Login Google", "No hay sesión iniciada")
+            findViewById<SignInButton>(R.id.btn_login_google).setOnClickListener { SignIn() }
         }
 
-        googleSignInClient.signOut().addOnCompleteListener(this){
-            //cod a ejecutar tras el signout normlamnete un redureccionamiento a login
-        }
-
-        //TEMPORAAAAAAAAAAAAAAAAAAAAAAAAAAAAL
-        auth = FirebaseAuth.getInstance() // (de paso, te evita crash al hacer SignOut)
-
-        findViewById<Button>(R.id.btn_go_main).setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish() // opcional: para que al darle atrás no vuelva a Profile
+        // TEMP (si tienes el botón en el XML)
+        val tempBtn = findViewById<Button?>(R.id.btn_go_main)
+        tempBtn?.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
+            finish()
         }
     }
 
-    // Función para manejar la visibilidad del layout
+    // Visibilidad del layout principal vs. contenedor de fragment (register)
     private fun updateLayoutVisibility() {
         val fragmentContainer = findViewById<View>(R.id.fragment_container_view)
         val mainLoginLayout = findViewById<View>(R.id.main_login_layout)
 
-        // Si hay entradas en el back stack (el fragment está abierto)
         if (supportFragmentManager.backStackEntryCount > 0) {
             mainLoginLayout.visibility = View.GONE
             fragmentContainer.visibility = View.VISIBLE
         } else {
-            // Si no hay entradas (el fragment se ha cerrado)
             mainLoginLayout.visibility = View.VISIBLE
             fragmentContainer.visibility = View.GONE
         }
     }
 
-    // Función para cargar el RegisterFragment
-    private fun loadRegisterFragment(){
-        // Al cargar el fragment, NO necesitas cambiar la visibilidad aquí
-        // La cambiaremos al hacer el commit, que dispara el listener.
-
+    private fun loadRegisterFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, RegisterFragment())
-            .addToBackStack(null) // Esto es CRÍTICO para que popBackStack funcione
+            .addToBackStack(null)
             .commit()
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            super.onBackPressed() // Permite que el fragment se cierre
-        } else {
-            super.onBackPressed() // Sale de la actividad
-        }
+        if (supportFragmentManager.backStackEntryCount > 0) super.onBackPressed()
+        else super.onBackPressed()
     }
 
-    private fun Login(){
+    private fun Login() {
         val email = emailField.text.toString()
         val password = passwordField.text.toString()
 
@@ -127,57 +103,55 @@ class LoginActivity : AppCompatActivity() {
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
-                if(task.isSuccessful){
+                if (task.isSuccessful) {
                     val user = auth.currentUser
 
-                    // 1. Obtener el email para usarlo como nombre, como se ha solicitado.
                     val userName = user?.email ?: "Usuario desconocido"
-
-                    // 2. Obtener la URL de la foto (será null/vacía para cuentas de email/password)
-                    // Esto hará que ProfileActivity cargue la imagen por defecto.
                     val userImageUri = user?.photoUrl?.toString() ?: ""
 
-                    val intent = Intent(this, ProfileActivity::class.java).apply{
+                    startActivity(Intent(this, MainActivity::class.java).apply {
                         putExtra("USER_NAME", userName)
                         putExtra("USER_IMAGE", userImageUri)
-                    }
-                    startActivity(intent)
-                }
-                else{
-                    Toast.makeText(this, "Error en el inicio de sesión: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    })
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Error en el inicio de sesión: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
 
-    private fun SignIn(){
+    private fun SignIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, 9001)
     }
 
-    private fun LoginSuccess(account: GoogleSignInAccount){
-        // Google proporciona el displayName y el photoUrl directamente.
-        val userName = account.displayName
-        val userImage = account.photoUrl
+    private fun LoginSuccess(account: GoogleSignInAccount) {
+        val userName = account.displayName ?: "Player"
+        val userImage = account.photoUrl?.toString() ?: ""
 
-        val intent = Intent(this, ProfileActivity::class.java).apply{
+        startActivity(Intent(this, MainActivity::class.java).apply {
             putExtra("USER_NAME", userName)
-            // La URL de Google se pasa como string para que ProfileActivity la descargue
-            putExtra("USER_IMAGE", userImage.toString())
-        }
-        startActivity(intent)
+            putExtra("USER_IMAGE", userImage)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 9001){
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data) //procesa la info
-            if(task.isSuccessful){
+        if (requestCode == 9001) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            if (task.isSuccessful) {
                 val account = task.getResult(ApiException::class.java)
-                //Log.d("Login Google", "Tengo la info de: " + account.displayName)
                 LoginSuccess(account)
-            }else {
-                Log.d("Login Google", "Error la info de: " + task.exception)
+            } else {
+                Log.d("Login Google", "Error: ${task.exception}")
             }
         }
     }
