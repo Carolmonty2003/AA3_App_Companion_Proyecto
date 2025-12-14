@@ -11,7 +11,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val toolbar = findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.top_toolbar)
+        setSupportActionBar(toolbar)
+
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
+
+        fun select(tabId: Int) {
+            when (tabId) {
+                /*R.id.nav_maps -> {
+                    toolbar.title = "Maps"
+                    replaceFragment(MapsFragment())
+                }
+                R.id.nav_agents -> {
+                    toolbar.title = "Agents"
+                    replaceFragment(AgentsFragment())
+                }
+                R.id.nav_events -> {
+                    toolbar.title = "Events"
+                    replaceFragment(EventsFragment())
+                }
+                R.id.nav_chat -> {
+                    toolbar.title = "Chat"
+                    replaceFragment(ChatFragment())
+                }*/
+            }
+        }
 
         // Fragment por defecto
         if (savedInstanceState == null) {
@@ -20,13 +44,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                //R.id.nav_maps -> replaceFragment(MapsFragment())
-                //R.id.nav_agents -> replaceFragment(AgentsFragment())
-                //R.id.nav_events -> replaceFragment(EventsFragment())
-                //R.id.nav_chat -> replaceFragment(ChatFragment())
-            }
+            select(item.itemId)
             true
+        }
+
+        toolbar.setNavigationOnClickListener {
+            // lo q se abra
         }
     }
 

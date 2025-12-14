@@ -1,10 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <!-- TOP BAR fija -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/top_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/darkBluePers"
+        app:navigationIcon="@drawable/ic_menu"
+        app:navigationIconTint="@color/white"
+        app:contentInsetStartWithNavigation="0dp"
+        app:contentInsetStart="0dp">
+
+        <!-- Título centrado real -->
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="Maps"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- Aquí se pintan los fragments -->
     <FrameLayout
@@ -13,13 +35,11 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <!-- (opcional) línea blanca arriba como en tu captura -->
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@android:color/white" />
 
-    <!-- Barra inferior fija -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
