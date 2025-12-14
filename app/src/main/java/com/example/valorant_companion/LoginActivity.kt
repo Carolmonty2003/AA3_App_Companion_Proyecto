@@ -72,7 +72,13 @@ class LoginActivity : AppCompatActivity() {
             //cod a ejecutar tras el signout normlamnete un redureccionamiento a login
         }
 
-        //inicio sesion con otros...
+        //TEMPORAAAAAAAAAAAAAAAAAAAAAAAAAAAAL
+        auth = FirebaseAuth.getInstance() // (de paso, te evita crash al hacer SignOut)
+
+        findViewById<Button>(R.id.btn_go_main).setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish() // opcional: para que al darle atrás no vuelva a Profile
+        }
     }
 
     // Función para manejar la visibilidad del layout

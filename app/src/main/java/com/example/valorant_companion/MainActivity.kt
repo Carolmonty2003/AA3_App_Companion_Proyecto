@@ -18,29 +18,29 @@ class MainActivity : AppCompatActivity() {
 
         fun select(tabId: Int) {
             when (tabId) {
-                /*R.id.nav_maps -> {
+                R.id.nav_maps -> {
                     toolbar.title = "Maps"
                     replaceFragment(MapsFragment())
                 }
                 R.id.nav_agents -> {
                     toolbar.title = "Agents"
-                    replaceFragment(AgentsFragment())
+                    //replaceFragment(AgentsFragment())
                 }
                 R.id.nav_events -> {
                     toolbar.title = "Events"
-                    replaceFragment(EventsFragment())
+                    //replaceFragment(EventsFragment())
                 }
                 R.id.nav_chat -> {
                     toolbar.title = "Chat"
-                    replaceFragment(ChatFragment())
-                }*/
+                    //replaceFragment(ChatFragment())
+                }
             }
         }
 
         // Fragment por defecto
         if (savedInstanceState == null) {
-            //replaceFragment(MapsFragment())
             bottomNav.selectedItemId = R.id.nav_maps
+            select(R.id.nav_maps)
         }
 
         bottomNav.setOnItemSelectedListener { item ->
