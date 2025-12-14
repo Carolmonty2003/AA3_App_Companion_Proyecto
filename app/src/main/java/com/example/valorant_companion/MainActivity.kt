@@ -1,178 +1,66 @@
 package com.example.valorant_companion
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.TextView
+import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var button: Button
-    private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var emailField: EditText
-    private lateinit var passwordField: EditText
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //button = findViewById(R.id.button)
-        /*button.setOnClickListener {
-            val intent = Intent(this, SplashScreenActivity::class.java)
-            startActivity(intent)
-        }*/
+        val toolbar = findViewById<MaterialToolbar>(R.id.top_toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        //inicio sesion normal
-        emailField = findViewById(R.id.input_email)
-        passwordField = findViewById(R.id.input_password)
+        val toolbarTitle = findViewById<TextView>(R.id.toolbar_title)
 
-        auth = FirebaseAuth.getInstance()
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        // Cargar el listener del back stack
-        supportFragmentManager.addOnBackStackChangedListener {
-            // Aquí defines la función anónima (el listener)
-            updateLayoutVisibility()
+        fun select(tabId: Int) {
+            when (tabId) {
+                R.id.nav_maps -> {
+                    toolbarTitle.text = "Maps"
+                    replaceFragment(MapsFragment())
+                }
+                R.id.nav_agents -> {
+                    toolbarTitle.text = "Agents"
+                    replaceFragment(AgentsFragment())
+                }
+                R.id.nav_events -> {
+                    toolbarTitle.text = "Events"
+                    replaceFragment(EventsFragment())
+                }
+                R.id.nav_chat -> {
+                    toolbarTitle.text = "Chat"
+                    replaceFragment(ChatFragment())
+                }
+            }
         }
 
-        findViewById<Button>(R.id.btn_login).setOnClickListener{Login()}
-        //findViewById<Button>(R.id.btn_register).setOnClickListener{Register()}
-        findViewById<Button>(R.id.btn_register).setOnClickListener{ loadRegisterFragment() }
-
-        //inicio sesion google
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("310814606778-9l743rkti6f3eq78h75aai6uaj94fvu7.apps.googleusercontent.com")
-            .requestEmail()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        val account = GoogleSignIn.getLastSignedInAccount(this)
-
-        account?.let{
-            //Log.d("Login Google", "Ya se ha robado la info de: " + account.displayName + "anteriorimente")
-            //startActivity(Intent(this, ProfileActivity::class.java))
-            LoginSuccess(account)
-        } ?: run {
-            Log.d("Login Google", "No hay sesion iniciada")
-            findViewById<SignInButton>(R.id.btn_login_google).setOnClickListener{SignIn()}
+        // Fragment por defecto
+        if (savedInstanceState == null) {
+            bottomNav.selectedItemId = R.id.nav_maps
+            select(R.id.nav_maps)
         }
 
-        googleSignInClient.signOut().addOnCompleteListener(this){
-            //cod a ejecutar tras el signout normlamnete un redureccionamiento a login
+        bottomNav.setOnItemSelectedListener { item ->
+            select(item.itemId)
+            true
         }
 
-        //inicio sesion con otros...
-    }
-
-    // Función para manejar la visibilidad del layout
-    private fun updateLayoutVisibility() {
-        val fragmentContainer = findViewById<View>(R.id.fragment_container_view)
-        val mainLoginLayout = findViewById<View>(R.id.main_login_layout)
-
-        // Si hay entradas en el back stack (el fragment está abierto)
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            mainLoginLayout.visibility = View.GONE
-            fragmentContainer.visibility = View.VISIBLE
-        } else {
-            // Si no hay entradas (el fragment se ha cerrado)
-            mainLoginLayout.visibility = View.VISIBLE
-            fragmentContainer.visibility = View.GONE
+        toolbar.setNavigationOnClickListener {
+            // lo q se abra
         }
     }
 
-    // Función para cargar el RegisterFragment
-    private fun loadRegisterFragment(){
-        // Al cargar el fragment, NO necesitas cambiar la visibilidad aquí
-        // La cambiaremos al hacer el commit, que dispara el listener.
-
+    private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, RegisterFragment())
-            .addToBackStack(null) // Esto es CRÍTICO para que popBackStack funcione
+            .replace(R.id.fragment_container, fragment)
             .commit()
-    }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            super.onBackPressed() // Permite que el fragment se cierre
-        } else {
-            super.onBackPressed() // Sale de la actividad
-        }
-    }
-
-    private fun Login(){
-        val email = emailField.text.toString()
-        val password = passwordField.text.toString()
-
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Por favor, ingrese email y contraseña.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if(task.isSuccessful){
-                    val user = auth.currentUser
-
-                    // 1. Obtener el email para usarlo como nombre, como se ha solicitado.
-                    val userName = user?.email ?: "Usuario desconocido"
-
-                    // 2. Obtener la URL de la foto (será null/vacía para cuentas de email/password)
-                    // Esto hará que ProfileActivity cargue la imagen por defecto.
-                    val userImageUri = user?.photoUrl?.toString() ?: ""
-
-                    val intent = Intent(this, ProfileActivity::class.java).apply{
-                        putExtra("USER_NAME", userName)
-                        putExtra("USER_IMAGE", userImageUri)
-                    }
-                    startActivity(intent)
-                }
-                else{
-                    Toast.makeText(this, "Error en el inicio de sesión: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
-
-    private fun SignIn(){
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, 9001)
-    }
-
-    private fun LoginSuccess(account: GoogleSignInAccount){
-        // Google proporciona el displayName y el photoUrl directamente.
-        val userName = account.displayName
-        val userImage = account.photoUrl
-
-        val intent = Intent(this, ProfileActivity::class.java).apply{
-            putExtra("USER_NAME", userName)
-            // La URL de Google se pasa como string para que ProfileActivity la descargue
-            putExtra("USER_IMAGE", userImage.toString())
-        }
-        startActivity(intent)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == 9001){
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data) //procesa la info
-            if(task.isSuccessful){
-                val account = task.getResult(ApiException::class.java)
-                //Log.d("Login Google", "Tengo la info de: " + account.displayName)
-                LoginSuccess(account)
-            }else {
-                Log.d("Login Google", "Error la info de: " + task.exception)
-            }
-        }
     }
 }
