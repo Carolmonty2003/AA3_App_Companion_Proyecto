@@ -11,20 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/darkBluePers"
-        app:navigationIcon="@drawable/ic_menu"
-        app:navigationIconTint="@color/white"
-        app:contentInsetStartWithNavigation="0dp"
-        app:contentInsetStart="0dp">
+        app:navigationIconTint="@color/white">
 
-        <!-- Título centrado real -->
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:text="Maps"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </com.google.android.material.appbar.MaterialToolbar>
 
