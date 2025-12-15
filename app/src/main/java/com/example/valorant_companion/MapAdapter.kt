@@ -1,13 +1,13 @@
 package com.example.valorant_companion
 
-import ValorantApi.ValorantMap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import ValorantApi.ValorantMap
+import com.example.valorant_companion.utils.SimpleImageLoader
 
 class MapAdapter(
     private var items: List<ValorantMap>,
@@ -39,9 +39,12 @@ class MapAdapter(
         fun bind(map: ValorantMap) {
             name.text = map.displayName ?: "Unknown"
 
-            Glide.with(itemView)
-                .load(map.listViewIcon)
-                .into(img)
+            // listViewIcon = imagen de la lista
+            SimpleImageLoader.load(
+                map.listViewIcon,
+                img,
+                fallbackResId = R.drawable.ic_launcher_foreground
+            )
 
             itemView.setOnClickListener { onClick(map) }
         }

@@ -2,7 +2,6 @@ package com.example.valorant_companion
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,19 +17,17 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         super.onViewCreated(view, savedInstanceState)
 
         val recycler = view.findViewById<RecyclerView>(R.id.maps_recycler)
-        val loading = view.findViewById<ProgressBar>(R.id.maps_loading)
+        val splashLoading = view.findViewById<View>(R.id.maps_loading_splash)
 
         recycler.layoutManager = LinearLayoutManager(requireContext())
-
         val adapter = MapAdapter(emptyList()) { map ->
-            // abrir plantilla reutilizable de detalle
             parentFragmentManager.beginTransaction()
                 .replace(
                     R.id.fragment_container,
                     MapDetailFragment.newInstance(
-                        map.displayName ?: "",
-                        map.displayIcon ?: "",
-                        map.splash ?: ""
+                        displayName = map.displayName ?: "",
+                        displayIcon = map.displayIcon ?: "",
+                        splash = map.splash ?: ""
                     )
                 )
                 .addToBackStack(null)
@@ -38,8 +35,21 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
         }
         recycler.adapter = adapter
 
-        loading.visibility = View.VISIBLE
+        // Splash visible al empezar
+        val startMs = System.currentTimeMillis()
+        splashLoading.visibility = View.VISIBLE
         recycler.visibility = View.GONE
+
+        fun finishLoading() {
+            val elapsed = System.currentTimeMillis() - startMs
+            val delay = (2000L - elapsed).coerceAtLeast(0L)
+
+            splashLoading.postDelayed({
+                if (!isAdded) return@postDelayed
+                splashLoading.visibility = View.GONE
+                recycler.visibility = View.VISIBLE
+            }, delay)
+        }
 
         ValorantApiInstance.api.getMaps().enqueue(object : Callback<ValorantMapsResponse> {
             override fun onResponse(
@@ -51,15 +61,11 @@ class MapsFragment : Fragment(R.layout.fragment_maps) {
                     ?: emptyList()
 
                 adapter.submit(maps)
-
-                loading.visibility = View.GONE
-                recycler.visibility = View.VISIBLE
+                finishLoading()
             }
 
             override fun onFailure(call: Call<ValorantMapsResponse>, t: Throwable) {
-                loading.visibility = View.GONE
-                // aquí luego puedes poner un TextView de error si quieres
-                recycler.visibility = View.VISIBLE
+                finishLoading()
             }
         })
     }

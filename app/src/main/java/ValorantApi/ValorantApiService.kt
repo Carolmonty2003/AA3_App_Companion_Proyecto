@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ValorantApiService {
-    @GET("v1/maps")
+    @GET("maps")
     fun getMaps(): Call<ValorantMapsResponse>
 }
