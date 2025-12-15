@@ -1,0 +1,180 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/map_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#88000000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/map_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingBottom="10dp"/>
+
+        <ImageView
+            android:id="@+id/map_display_icon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"/>
+
+        <!-- leyenda: la harás a mano -->
+        <LinearLayout
+            android:id="@+id/map_legend_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Map Legend"
+                android:textColor="@android:color/white"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"/>
+
+            <!-- Fila 1 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp">
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="#5C9C8F"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Defenders Buy Zone"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <!-- Fila 2 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp">
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="#A06D76"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Attackers Buy Zone"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <!-- Fila 3 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp">
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="#D7A38E"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spike Plant Zone"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <!-- Fila 4 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp">
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="5dp"
+                    android:background="#2EE7B8"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Defenders Spawn Barrier"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <!-- Fila 5 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="18dp"
+                    android:layout_height="5dp"
+                    android:background="#FF3B3B"
+                    android:layout_marginEnd="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Attackers Spawn Barrier"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <include
+        android:id="@+id/detail_loading_splash"
+        layout="@layout/activity_splashscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>
