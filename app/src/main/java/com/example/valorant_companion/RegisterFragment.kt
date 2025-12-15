@@ -3,6 +3,7 @@ package com.example.valorant_companion
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterFragment : Fragment() {
@@ -24,6 +26,9 @@ class RegisterFragment : Fragment() {
     private lateinit var usernameField: EditText
     private lateinit var profileImage: ImageView
     private var selectedImageUri: Uri? = null
+
+    private lateinit var analytics: FirebaseAnalytics
+    private var registerStartMs: Long = 0L
 
     private val selectImageLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -46,6 +51,10 @@ class RegisterFragment : Fragment() {
         profileImage = view.findViewById(R.id.image_register_profile)
 
         profileImage.setOnClickListener { selectImageLauncher.launch("image/*") }
+
+        analytics = FirebaseAnalytics.getInstance(requireContext())
+        registerStartMs = SystemClock.elapsedRealtime()
+
 
         view.findViewById<Button>(R.id.btn_fragment_register).setOnClickListener { registerUser() }
 
@@ -76,6 +85,14 @@ class RegisterFragment : Fragment() {
                         putExtra("USER_IMAGE", selectedImageUri?.toString() ?: "")
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     })
+                    val durationMs = SystemClock.elapsedRealtime() - registerStartMs
+
+                    val params = Bundle().apply {
+                        putLong("duration_ms", durationMs)
+                        putBoolean("picked_image", selectedImageUri != null)
+                    }
+
+                    analytics.logEvent("register_time", params)
                     requireActivity().finish()
 
                 } else {
