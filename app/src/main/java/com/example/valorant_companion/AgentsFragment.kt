@@ -27,8 +27,12 @@ class AgentsFragment : Fragment(R.layout.fragment_agents) {
         recycler.layoutManager = GridLayoutManager(requireContext(), 4)
 
         val adapter = AgentAdapter(emptyList()) { agent ->
-            // aquí luego abrimos el detalle
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, AgentDetailFragment.newInstance(agent.uuid ?: ""))
+                .addToBackStack(null)
+                .commit()
         }
+
         recycler.adapter = adapter
 
 
