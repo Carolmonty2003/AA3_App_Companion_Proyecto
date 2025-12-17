@@ -1,4 +1,4 @@
-package com.example.valorant_companion.utils
+package com.example.valorant_companion
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import ValorantApi.ValorantAgent
-import com.example.valorant_companion.R
 import com.example.valorant_companion.utils.SimpleImageLoader
 
 class AgentAdapter(
