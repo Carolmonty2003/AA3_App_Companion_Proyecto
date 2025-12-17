@@ -1,6 +1,10 @@
+package com.example.valorant_companion
+
 data class ChatMessage(
-    val uid: String? = null,
-    val name: String? = null,
-    val text: String? = null,
-    val timestamp: Long? = null
-)
+    var uid: String? = null,
+    var name: String? = null,
+    var text: String? = null,
+    var timestamp: Long? = null
+) {
+    constructor() : this(null, null, null, null)
+}
