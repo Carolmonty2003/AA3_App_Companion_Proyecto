@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Valorant_Companion</string>
     <string name="app_version">V1</string>
+    <string name="mail">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>

@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:backgroundTint="?attr/colorOutline"
-            android:hint="Email"
+            android:hint="@string/mail"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textColor="?attr/colorOnSurface"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:backgroundTint="?attr/colorOutline"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="10dp"
             android:textColor="?attr/colorOnSurface"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:backgroundTint="?attr/colorSecondary"
-            android:text="Login" />
+            android:text="@string/login" />
 
         <Button
             android:id="@+id/btn_register"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:backgroundTint="?attr/colorSecondary"
-            android:text="Register" />
+            android:text="@string/register" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btn_login_google"
