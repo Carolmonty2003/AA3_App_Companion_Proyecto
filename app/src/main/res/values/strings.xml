@@ -8,7 +8,7 @@
     <string name="mapsTitle">Maps</string>
     <string name="agentsTitle">Agents</string>
     <string name="eventsTitle">Events</string>
-    <string name="chatTitle">Maps</string>
+    <string name="chatTitle">Chat</string>
     <string name="profileTitle">Profile</string>
     <string name="settingsTitle">Settings</string>
     <string name="messagesDefaultText">Message...</string>
