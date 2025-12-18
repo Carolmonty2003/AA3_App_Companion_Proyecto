@@ -18,4 +18,8 @@
     <string name="SignOutTextButton">Tanca la sessió</string>
     <string name="NameDefaultText">Nom</string>
     <string name="CancelTextButton">Cancel·la</string>
+    <string name="EnTextLenguage">Anglés</string>
+    <string name="EsTextLenguage">Castellá</string>
+    <string name="CatTextLenguage">Catalá</string>
+    <string name="SettingsApplyButton">Aplica la configuració</string>
 </resources>

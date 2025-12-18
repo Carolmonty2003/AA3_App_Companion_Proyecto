@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settingsTitle"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingBottom="12dp"/>
+
+    <RadioGroup
+        android:id="@+id/lang_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/lang_en"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EnTextLenguage"/>
+
+        <RadioButton
+            android:id="@+id/lang_es"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EsTextLenguage"/>
+
+        <RadioButton
+            android:id="@+id/lang_cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/CatTextLenguage"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_apply_lang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/SettingsApplyButton"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

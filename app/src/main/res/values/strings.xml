@@ -21,4 +21,8 @@
     <string name="SignOutTextButton">Sign Out</string>
     <string name="NameDefaultText">Name</string>
     <string name="CancelTextButton">Cancel</string>
+    <string name="EnTextLenguage">English</string>
+    <string name="EsTextLenguage">Spanish</string>
+    <string name="CatTextLenguage">Catalán</string>
+    <string name="SettingsApplyButton">Settings Apply</string>
 </resources>

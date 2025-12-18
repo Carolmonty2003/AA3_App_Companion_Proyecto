@@ -9,6 +9,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
+import com.example.valorant_companion.com.example.valorant_companion.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -85,7 +86,13 @@ class MainActivity : AppCompatActivity() {
                 replaceFragment(ProfileFragment.newInstance(name, image), addToBackStack = true)
                 true
             }
-            R.id.settings -> true
+            R.id.settings -> {
+                // Cambia título del toolbar (si lo gestionas con TextView)
+                findViewById<TextView>(R.id.toolbar_title).text = getString(R.string.settingsTitle)
+
+                replaceFragment(SettingsFragment(), addToBackStack = true)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
