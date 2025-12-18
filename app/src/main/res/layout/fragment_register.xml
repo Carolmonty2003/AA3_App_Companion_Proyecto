@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="Nombre de Usuario"
+        android:hint="@string/NameDefaultText"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textColor="?attr/colorOnPrimary"
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="Email"
+        android:hint="@string/mailDefaultText"
         android:inputType="textEmailAddress"
         android:padding="10dp"
         android:textColor="?attr/colorOnPrimary"
@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:hint="Contraseña"
+        android:hint="@string/passwordDefaultText"
         android:inputType="textPassword"
         android:padding="10dp"
         android:textColor="?attr/colorOnPrimary"
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:backgroundTint="?attr/colorSecondary"
-        android:text="Registrarse"
+        android:text="@string/registerTextButton"
         android:textColor="?attr/colorOnPrimary" />
 
     <Button
@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="?attr/colorSecondary"
-        android:text="Cancelar"
+        android:text="@string/CancelTextButton"
         android:textColor="?attr/colorOnPrimary" />
 
 </LinearLayout>
