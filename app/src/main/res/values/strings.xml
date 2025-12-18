@@ -6,6 +6,11 @@
     <string name="loginTextButton">Login</string>
     <string name="registerTextButton">Register</string>
     <string name="mapsTitle">Maps</string>
+    <string name="agentsTitle">Agents</string>
+    <string name="eventsTitle">Events</string>
+    <string name="chatTitle">Maps</string>
+    <string name="profileTitle">Profile</string>
+    <string name="settingsTitle">Settings</string>
     <string name="messagesDefaultText">Message...</string>
     <string name="mapLegendText">Map Legend</string>
     <string name="DefenderText">Defenders Buy Zone</string>
