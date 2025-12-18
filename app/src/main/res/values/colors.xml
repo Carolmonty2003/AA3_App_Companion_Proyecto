@@ -11,4 +11,9 @@
     <color name="greyPers">#282828</color>
     <color name="lightGreyPers">#505050</color>
     <color name="extraLightGreyPers">#EBEBEB</color>
+    <color name="DefenderColorSquare">#5C9C8F</color>
+    <color name="AttackerColorSquare">#A06D76</color>
+    <color name="SpikeColorSquare">#D7A38E</color>
+    <color name="DefenderBarrierColorSquare">#2EE7B8</color>
+    <color name="AttackerBarrierColorSquare">#FF3B3B</color>
 </resources>

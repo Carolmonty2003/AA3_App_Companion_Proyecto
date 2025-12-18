@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +12,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#88000000"/>
+        android:background="?attr/colorOnBackground"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:id="@+id/map_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="26sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -51,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Map Legend"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"/>
@@ -67,14 +68,14 @@
                 <View
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:background="#5C9C8F"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/DefenderColorSquare" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Defenders Buy Zone"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -90,14 +91,14 @@
                 <View
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:background="#A06D76"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/AttackerColorSquare" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Attackers Buy Zone"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -113,8 +114,8 @@
                 <View
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:background="#D7A38E"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/SpikeColorSquare" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -136,8 +137,8 @@
                 <View
                     android:layout_width="18dp"
                     android:layout_height="5dp"
-                    android:background="#2EE7B8"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/DefenderBarrierColorSquare" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -158,20 +159,21 @@
                 <View
                     android:layout_width="18dp"
                     android:layout_height="5dp"
-                    android:background="#FF3B3B"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/AttackerBarrierColorSquare" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Attackers Spawn Barrier"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
+
     <include
         android:id="@+id/detail_loading_splash"
         layout="@layout/activity_splashscreen"
