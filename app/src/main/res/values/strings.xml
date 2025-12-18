@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">Valorant_Companion</string>
-    <string name="app_version">V1</string>
-    <string name="mailDefaultText">Email</string>
+    <string name="app_name" translatable="false">Valorant_Companion</string>
+    <string name="app_version" translatable="false">V1</string>
+    <string name="mailDefaultText" translatable="false">Email</string>
     <string name="passwordDefaultText">Password</string>
     <string name="loginTextButton">Login</string>
     <string name="registerTextButton">Register</string>
     <string name="mapsTitle">Maps</string>
     <string name="agentsTitle">Agents</string>
     <string name="eventsTitle">Events</string>
-    <string name="chatTitle">Chat</string>
+    <string name="chatTitle" translatable="false">Chat</string>
     <string name="profileTitle">Profile</string>
     <string name="settingsTitle">Settings</string>
     <string name="messagesDefaultText">Message...</string>
