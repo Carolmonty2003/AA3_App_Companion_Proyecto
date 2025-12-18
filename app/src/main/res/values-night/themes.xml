@@ -1,7 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Valorant_Companion" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Marca (en night subimos un pelín el azul para que contraste mejor) -->
+        <item name="colorPrimary">@color/lightBluePers</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/bluePers</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+
+        <!-- Acento Valorant (rojo) -->
+        <item name="colorSecondary">@color/darkRedPers</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorSecondaryContainer">@color/redPers</item>
+        <item name="colorOnSecondaryContainer">@color/darkBluePers</item>
+
+        <!-- EXTRA (si Material lo usa) -->
+        <item name="colorTertiary">@color/lightBluePers</item>
+        <item name="colorOnTertiary">@color/lightGreyPers</item>
+
+        <!-- Fondo / superficies (más “nocturno”) -->
+        <item name="colorOnBackground">@color/darkBluePers</item>
+
+        <item name="colorSurface">@color/darkBluePers</item>
+        <item name="colorOnSurface">@color/lightGreyPers</item>
+
+        <!-- Errores -->
+        <item name="colorError">@color/darkRedPers</item>
+        <item name="colorOnError">@color/white</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/darkBluePers</item>
+        <item name="android:navigationBarColor">@color/darkBluePers</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
