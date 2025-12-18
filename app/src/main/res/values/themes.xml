@@ -36,4 +36,11 @@
 
     <style name="Theme.Valorant_Companion" parent="Base.Theme.Valorant_Companion" />
 
+    <style name="ThemeOverlay.Valorant.ToolbarPopup" parent="ThemeOverlay.Material3">
+        <item name="android:popupBackground">@color/bluePers</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
 </resources>
