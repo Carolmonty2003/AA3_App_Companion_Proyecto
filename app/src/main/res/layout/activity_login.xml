@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBluePers"
+    android:background="?attr/colorOnBackground"
     tools:context=".LoginActivity">
 
 
@@ -37,31 +37,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="?attr/colorOutline"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white" />
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurface" />
 
         <EditText
             android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            android:backgroundTint="?attr/colorOutline"
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:backgroundTint="@color/white" />
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurface" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
-            android:backgroundTint="@color/darkRedPers"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="Login" />
 
         <Button
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/darkRedPers"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="Register" />
 
         <com.google.android.gms.common.SignInButton
@@ -85,7 +85,7 @@
             android:layout_marginTop="12dp"
             android:backgroundTint="@color/bluePers"
             android:text="Go to Main (TEMP)"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </RelativeLayout>
