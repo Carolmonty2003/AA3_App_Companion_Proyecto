@@ -2,37 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightGreyPers">
+    android:background="@android:color/black"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- HEADER -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:paddingTop="8dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_logo"
-                android:contentDescription="@string/app_name" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Agents"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textSize="18sp" />
-        </LinearLayout>
 
         <!-- BARRA ROLES (iconos se cargarán desde la API) -->
         <LinearLayout

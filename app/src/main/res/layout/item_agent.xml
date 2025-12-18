@@ -1,7 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="72dp"
     android:layout_height="72dp"
-    android:layout_margin="6dp">
+    android:layout_margin="6dp"
+    android:background="@drawable/bg_agent_item"
+    android:padding="4dp">
 
     <ImageView
         android:id="@+id/item_agent_img"
