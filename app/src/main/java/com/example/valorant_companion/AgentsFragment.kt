@@ -21,19 +21,21 @@ class AgentsFragment : Fragment(R.layout.fragment_agents) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bg = view.findViewById<android.widget.ImageView>(R.id.agents_bg)
+
         val analytics = FirebaseAnalytics.getInstance(requireContext())
 
         val recycler = view.findViewById<RecyclerView>(R.id.agents_recycler)
         val splashLoading = view.findViewById<View>(R.id.agents_loading_splash)
 
-        // Imágenes barra roles
+        // Imagenes barra roles
         val imgAll = view.findViewById<android.widget.ImageView>(R.id.imgAll)
         val imgDuelist = view.findViewById<android.widget.ImageView>(R.id.imgDuelist)
         val imgInitiator = view.findViewById<android.widget.ImageView>(R.id.imgInitiator)
         val imgController = view.findViewById<android.widget.ImageView>(R.id.imgController)
         val imgSentinel = view.findViewById<android.widget.ImageView>(R.id.imgSentinel)
 
-        // Subrayados
+        // Subrayados barra roles
         val underlineAll = view.findViewById<View>(R.id.underlineAll)
         val underlineDuelist = view.findViewById<View>(R.id.underlineDuelist)
         val underlineInitiator = view.findViewById<View>(R.id.underlineInitiator)
@@ -57,6 +59,32 @@ class AgentsFragment : Fragment(R.layout.fragment_agents) {
         splashLoading.visibility = View.VISIBLE
         recycler.visibility = View.GONE
 
+        // cargar mapa (ascent)
+        ValorantApiInstance.api.getMaps().enqueue(object : Callback<ValorantApi.ValorantMapsResponse> {
+            override fun onResponse(
+                call: Call<ValorantApi.ValorantMapsResponse>,
+                response: Response<ValorantApi.ValorantMapsResponse>
+            ) {
+                if (!response.isSuccessful) return
+
+                val maps = response.body()?.data ?: emptyList()
+
+                val splashUrl = maps.firstOrNull { it.displayName == "Ascent" }?.splash
+                    ?: maps.firstOrNull { !it.splash.isNullOrBlank() }?.splash
+
+
+                com.example.valorant_companion.utils.SimpleImageLoader.load(
+                    splashUrl,
+                    bg,
+                    fallbackResId = R.drawable.ic_launcher_foreground
+                )
+            }
+
+            override fun onFailure(call: Call<ValorantApi.ValorantMapsResponse>, t: Throwable) {
+                // si falla, no pasa nada (se queda negro)
+            }
+        })
+
         val apiStartMs = SystemClock.elapsedRealtime()
 
         fun setUnderline(active: View) {
@@ -67,7 +95,7 @@ class AgentsFragment : Fragment(R.layout.fragment_agents) {
 
         fun roleMatches(agentRole: String?, selected: String?): Boolean {
             if (selected == null) return true
-            // selected guarda "ES|EN"
+
             val parts = selected.split("|")
             return agentRole == parts[0] || agentRole == parts.getOrNull(1)
         }
