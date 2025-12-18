@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Map Legend"
+                android:text="@string/mapLegendText"
                 android:textColor="?attr/colorOnPrimary"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -74,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Defenders Buy Zone"
+                    android:text="@string/DefenderText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
@@ -97,7 +97,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Attackers Buy Zone"
+                    android:text="@string/AttackerText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
@@ -120,7 +120,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spike Plant Zone"
+                    android:text="@string/SpikeText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
@@ -143,7 +143,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Defenders Spawn Barrier"
+                    android:text="@string/DefenderBText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
@@ -165,7 +165,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Attackers Spawn Barrier"
+                    android:text="@string/AttackersBText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>

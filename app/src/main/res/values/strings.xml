@@ -7,4 +7,11 @@
     <string name="registerTextButton">Register</string>
     <string name="mapsTitle">Maps</string>
     <string name="messagesDefaultText">Message...</string>
+    <string name="mapLegendText">Map Legend</string>
+    <string name="DefenderText">Defenders Buy Zone</string>
+    <string name="AttackerText">Attackers Buy Zone</string>
+    <string name="SpikeText">Spike Plant Zone</string>
+    <string name="DefenderBText">Defenders Spawn Barrier</string>
+    <string name="AttackersBText">Attackers Spawn Barrier</string>
+    <string name="SignOutTextButton">Sign Out</string>
 </resources>
