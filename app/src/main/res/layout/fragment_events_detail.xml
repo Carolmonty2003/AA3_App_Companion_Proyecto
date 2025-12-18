@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGreyPers">
+
+    <!-- Imagen del evento -->
+    <ImageView
+        android:id="@+id/event_display_icon"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_logo"
+        android:contentDescription="@string/app_name" />
+
+    <!-- Título del evento -->
+    <TextView
+        android:id="@+id/event_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:gravity="center"
+        android:text="Event name"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Splash / loading  -->
+    <include
+        android:id="@+id/detail_loading_splash"
+        layout="@layout/activity_splashscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>

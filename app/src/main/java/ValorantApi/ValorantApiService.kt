@@ -23,4 +23,6 @@ fun getAgentByUuid(
     @Query("language") language: String = "es-ES"
 ): Call<ValorantAgentDetailResponse>
 
+    @GET("events")
+    fun getEvents(): Call<ValorantEventsResponse>
 }

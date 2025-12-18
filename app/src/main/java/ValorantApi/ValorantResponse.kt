@@ -44,3 +44,18 @@ data class ValorantAbility(
     val description: String?,
     val displayIcon: String?
 )
+
+data class ValorantEventsResponse(
+    val status: Int,
+    val data: List<ValorantEvent>
+)
+
+data class ValorantEvent(
+    val uuid: String?,
+    val displayName: String?,
+    val shortDisplayName: String?,
+    val startTime: String?,
+    val endTime: String?,
+    val displayIcon: String?,
+    val type: String?
+)
