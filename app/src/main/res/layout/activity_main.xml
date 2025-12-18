@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="Maps"
+            android:text="@string/mapsTitle"
             android:textColor="?attr/colorOnSurface"
             android:textSize="18sp"
             android:textStyle="bold" />
