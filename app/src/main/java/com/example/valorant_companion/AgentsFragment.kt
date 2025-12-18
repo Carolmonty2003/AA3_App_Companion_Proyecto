@@ -81,7 +81,6 @@ class AgentsFragment : Fragment(R.layout.fragment_agents) {
             }
 
             override fun onFailure(call: Call<ValorantApi.ValorantMapsResponse>, t: Throwable) {
-                // si falla, no pasa nada (se queda negro)
             }
         })
 
@@ -194,7 +193,7 @@ class AgentsFragment : Fragment(R.layout.fragment_agents) {
                     allAgents = agents
 
                     // Cargar iconos de la barra desde API
-                    imgAll.setImageResource(R.drawable.ic_logo) // all = logo local
+                    imgAll.setImageResource(R.drawable.ic_all_grid)
                     loadRoleIcon("Duelista", "Duelist", imgDuelist)
                     loadRoleIcon("Iniciador", "Initiator", imgInitiator)
                     loadRoleIcon("Controlador", "Controller", imgController)
