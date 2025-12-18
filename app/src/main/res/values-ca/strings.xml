@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="passwordDefaultText">Contrasenya</string>
+    <string name="loginTextButton">Inici de sesió</string>
+    <string name="registerTextButton">Registra</string>
+    <string name="mapsTitle">Mapes</string>
+    <string name="agentsTitle">Agents</string>
+    <string name="eventsTitle">Esdeveniments</string>
+    <string name="profileTitle">Perfil</string>
+    <string name="settingsTitle">Ajustaments</string>
+    <string name="messagesDefaultText">Missatge...</string>
+    <string name="mapLegendText">Llegenda del mapa</string>
+    <string name="DefenderText">Zona de compra dels defensors</string>
+    <string name="AttackerText">Zona de compra dels atacants</string>
+    <string name="SpikeText">Zona de plantes d\'espiga</string>
+    <string name="DefenderBText">Barrera de generació dels defensors</string>
+    <string name="AttackersBText">Els atacants generen una barrera</string>
+    <string name="SignOutTextButton">Tanca la sessió</string>
+    <string name="NameDefaultText">Nom</string>
+    <string name="CancelTextButton">Cancel·la</string>
+</resources>
