@@ -23,7 +23,7 @@
             android:id="@+id/map_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textSize="26sp"
             android:textStyle="bold"
             android:gravity="center"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Map Legend"
-                android:textColor="@android:color/white"
+                android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"/>
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Defenders Buy Zone"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/white"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Attackers Buy Zone"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/white"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -165,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Attackers Spawn Barrier"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/white"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
             </LinearLayout>
