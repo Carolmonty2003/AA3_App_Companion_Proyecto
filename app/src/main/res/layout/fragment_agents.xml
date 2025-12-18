@@ -55,7 +55,7 @@
                     android:background="@android:color/transparent" />
             </LinearLayout>
 
-            <!-- DUELIST -->
+            <!-- duelistas -->
             <LinearLayout
                 android:id="@+id/btnDuelist"
                 android:layout_width="0dp"
@@ -78,7 +78,7 @@
                     android:background="@android:color/transparent" />
             </LinearLayout>
 
-            <!-- INITIATOR -->
+            <!-- iniciadoes -->
             <LinearLayout
                 android:id="@+id/btnInitiator"
                 android:layout_width="0dp"
@@ -101,7 +101,7 @@
                     android:background="@android:color/transparent" />
             </LinearLayout>
 
-            <!-- CONTROLLER -->
+            <!-- controladores -->
             <LinearLayout
                 android:id="@+id/btnController"
                 android:layout_width="0dp"
@@ -124,7 +124,7 @@
                     android:background="@android:color/transparent" />
             </LinearLayout>
 
-            <!-- SENTINEL -->
+            <!-- centinelas -->
             <LinearLayout
                 android:id="@+id/btnSentinel"
                 android:layout_width="0dp"
@@ -149,7 +149,7 @@
 
         </LinearLayout>
 
-        <!-- RECYCLER GRID -->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/agents_recycler"
             android:layout_width="match_parent"
@@ -160,7 +160,7 @@
 
     </LinearLayout>
 
-    <!-- SPLASH -->
+
     <include
         android:id="@+id/agents_loading_splash"
         layout="@layout/activity_splashscreen"
