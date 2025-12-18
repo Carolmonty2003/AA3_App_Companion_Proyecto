@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">Valorant_Companion</string>
     <string name="app_version">V1</string>
+    <string name="mailDefaultText">Email</string>
+    <string name="passwordDefaultText">Password</string>
+    <string name="loginTextButton">Login</string>
+    <string name="registerTextButton">Register</string>
+    <string name="mapsTitle">Maps</string>
+    <string name="agentsTitle">Agents</string>
+    <string name="eventsTitle">Events</string>
+    <string name="chatTitle">Chat</string>
+    <string name="profileTitle">Profile</string>
+    <string name="settingsTitle">Settings</string>
+    <string name="messagesDefaultText">Message...</string>
+    <string name="mapLegendText">Map Legend</string>
+    <string name="DefenderText">Defenders Buy Zone</string>
+    <string name="AttackerText">Attackers Buy Zone</string>
+    <string name="SpikeText">Spike Plant Zone</string>
+    <string name="DefenderBText">Defenders Spawn Barrier</string>
+    <string name="AttackersBText">Attackers Spawn Barrier</string>
+    <string name="SignOutTextButton">Sign Out</string>
+    <string name="NameDefaultText">Name</string>
+    <string name="CancelTextButton">Cancel</string>
 </resources>

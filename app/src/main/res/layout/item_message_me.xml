@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="You"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="12sp"
         android:textStyle="bold"
         android:layout_marginEnd="6dp"
@@ -23,7 +23,7 @@
         android:maxWidth="260dp"
         android:background="@drawable/bg_bubble_me"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnPrimary"
         android:textStyle="bold"
         android:textSize="14sp"/>
 </LinearLayout>

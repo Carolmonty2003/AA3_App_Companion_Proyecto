@@ -1,9 +1,46 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Valorant_Companion" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- BRAND -->
+        <item name="colorPrimary">@color/bluePers</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/lightBluePers</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+
+        <!-- ACCENT (botones importantes, etc.) -->
+        <item name="colorSecondary">@color/darkRedPers</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorSecondaryContainer">@color/redPers</item>
+        <item name="colorOnSecondaryContainer">@color/darkBluePers</item>
+
+        <!-- EXTRA (si Material lo usa) -->
+        <item name="colorTertiary">@color/lightBluePers</item>
+        <item name="colorOnTertiary">@color/white</item>
+
+        <!-- BACKGROUND / SURFACE -->
+        <item name="colorOnBackground">@color/darkBluePers</item>
+
+        <item name="colorSurface">@color/darkBluePers</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <!-- ERROR -->
+        <item name="colorError">@color/darkRedPers</item>
+        <item name="colorOnError">@color/white</item>
+
+        <!-- Status/Nav bar -->
+        <item name="android:statusBarColor">@color/darkBluePers</item>
+        <item name="android:navigationBarColor">@color/darkBluePers</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="Theme.Valorant_Companion" parent="Base.Theme.Valorant_Companion" />
+
+    <style name="ThemeOverlay.Valorant.ToolbarPopup" parent="ThemeOverlay.Material3">
+        <item name="android:popupBackground">@color/bluePers</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
 </resources>

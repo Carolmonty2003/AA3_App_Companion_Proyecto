@@ -10,16 +10,17 @@
         android:id="@+id/top_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/darkBluePers"
-        app:navigationIconTint="@color/white">
+        android:background="?attr/colorOnBackground"
+        app:navigationIconTint="?attr/colorOnPrimary"
+        app:popupTheme="@style/ThemeOverlay.Valorant.ToolbarPopup">
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="Maps"
-            android:textColor="@color/white"
+            android:text="@string/mapsTitle"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="18sp"
             android:textStyle="bold" />
     </com.google.android.material.appbar.MaterialToolbar>
@@ -35,12 +36,12 @@
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bluePers"
+        android:background="?attr/colorPrimary"
         app:menu="@menu/menu_bottom_nav"
         app:labelVisibilityMode="labeled"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/bottom_nav_tint"
+        app:itemTextColor="@color/bottom_nav_tint"
         app:itemRippleColor="@android:color/transparent"
         app:itemActiveIndicatorStyle="@null"
         app:itemIconSize="24dp" />

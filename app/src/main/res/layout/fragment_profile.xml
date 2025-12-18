@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/darkBluePers"
+    android:background="?attr/colorOnBackground"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".ProfileFragment">
@@ -18,7 +18,7 @@
         android:layout_marginBottom="32dp"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardElevation="0dp"
-        app:strokeColor="@color/darkRedPers"
+        app:strokeColor="?attr/colorSecondary"
         app:strokeWidth="2dp">
 
         <ImageView
@@ -32,17 +32,18 @@
         android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textColor="@color/white"
-        android:layout_marginBottom="16dp"/>
+        android:textColor="?attr/colorOnPrimary"
+        android:textColorLink="?attr/colorOnPrimary" />
 
     <Button
         android:id="@+id/signOutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/darkRedPers"
-        android:text="Sign Out"
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/SignOutTextButton"
         />
 
 </LinearLayout>

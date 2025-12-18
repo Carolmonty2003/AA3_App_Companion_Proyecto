@@ -31,19 +31,19 @@ class MainActivity : AppCompatActivity() {
         fun select(tabId: Int) {
             when (tabId) {
                 R.id.nav_maps -> {
-                    toolbarTitle.text = "Maps"
+                    toolbarTitle.setText(R.string.mapsTitle)
                     replaceFragment(MapsFragment())
                 }
                 R.id.nav_agents -> {
-                    toolbarTitle.text = "Agents"
+                    toolbarTitle.setText(R.string.agentsTitle)
                     replaceFragment(AgentsFragment())
                 }
                 R.id.nav_events -> {
-                    toolbarTitle.text = "Events"
+                    toolbarTitle.setText(R.string.eventsTitle)
                     replaceFragment(EventsFragment())
                 }
                 R.id.nav_chat -> {
-                    toolbarTitle.text = "Chat"
+                    toolbarTitle.setText(R.string.chatTitle)
                     val name = intent.getStringExtra("USER_NAME")
                     replaceFragment(ChatFragment.newInstance(name))
                 }
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                 val name = intent.getStringExtra("USER_NAME")
                 val image = intent.getStringExtra("USER_IMAGE")
 
-                findViewById<TextView>(R.id.toolbar_title).text = "Profile"
+                findViewById<TextView>(R.id.toolbar_title).setText(R.string.profileTitle)
                 replaceFragment(ProfileFragment.newInstance(name, image), addToBackStack = true)
                 true
             }

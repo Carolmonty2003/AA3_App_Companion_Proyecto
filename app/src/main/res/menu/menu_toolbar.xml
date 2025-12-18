@@ -5,12 +5,12 @@
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_account_circle"
-        android:title="Profile"
+        android:title="@string/profileTitle"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings"
-        android:title="Settings"
+        android:title="@string/settingsTitle"
         app:showAsAction="never" />
 </menu>
