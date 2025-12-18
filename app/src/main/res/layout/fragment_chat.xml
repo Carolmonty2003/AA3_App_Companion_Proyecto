@@ -33,7 +33,7 @@
             android:layout_height="38dp"
             android:layout_weight="1"
             android:background="@drawable/bg_chat_input"
-            android:hint="Message..."
+            android:hint="@string/messagesDefaultText"
             android:paddingHorizontal="12dp"
             android:textColor="?attr/colorOnSecondaryContainer"
             android:textColorHint="?attr/colorOnSecondaryContainer" />

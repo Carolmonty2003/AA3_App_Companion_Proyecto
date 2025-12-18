@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Valorant_Companion</string>
     <string name="app_version">V1</string>
-    <string name="mail">Email</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
+    <string name="mailDefaultText">Email</string>
+    <string name="passwordDefaultText">Password</string>
+    <string name="loginTextButton">Login</string>
+    <string name="registerTextButton">Register</string>
     <string name="mapsTitle">Maps</string>
+    <string name="messagesDefaultText">Message...</string>
 </resources>
