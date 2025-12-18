@@ -44,8 +44,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_chat -> {
                     toolbarTitle.text = "Chat"
-                    replaceFragment(ChatFragment())
+                    val name = intent.getStringExtra("USER_NAME")
+                    replaceFragment(ChatFragment.newInstance(name))
                 }
+
             }
         }
 
