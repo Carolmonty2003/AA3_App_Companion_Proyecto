@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="@string/NameDefaultText"
+        android:hint="@string/nameDefaultText"
         android:inputType="textPersonName"
         android:padding="10dp"
         android:textColor="?attr/colorOnPrimary"
@@ -46,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="@string/mailDefaultText"
+        android:hint="@string/MailDefaultText"
         android:inputType="textEmailAddress"
         android:padding="10dp"
         android:textColor="?attr/colorOnPrimary"
@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="?attr/colorSecondary"
-        android:text="@string/CancelTextButton"
+        android:text="@string/cancelTextButton"
         android:textColor="?attr/colorOnPrimary" />
 
 </LinearLayout>

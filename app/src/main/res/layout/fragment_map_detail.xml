@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mapLegendText"
+                android:text="@string/MapLegendText"
                 android:textColor="?attr/colorOnPrimary"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -74,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/DefenderText"
+                    android:text="@string/defenderText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
@@ -97,7 +97,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/AttackerText"
+                    android:text="@string/attackerText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
@@ -120,7 +120,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/SpikeText"
+                    android:text="@string/spikeText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
@@ -143,7 +143,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/DefenderBText"
+                    android:text="@string/defenderBText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
@@ -165,7 +165,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/AttackersBText"
+                    android:text="@string/attackersBText"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="14dp"
                     android:textStyle="bold"/>
