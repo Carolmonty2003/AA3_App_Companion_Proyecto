@@ -23,4 +23,6 @@
     <string name="CatTextLenguage">Catalá</string>
     <string name="SettingsApplyButton">Aplica la configuració</string>
     <string name="NightMode">Mode nocturn</string>
+    <string name="LenguageText">Idioma</string>
+    <string name="ActiveDesactText">Activar/desactivar</string>
 </resources>
