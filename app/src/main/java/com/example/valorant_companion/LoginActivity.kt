@@ -69,11 +69,7 @@ class LoginActivity : AppCompatActivity() {
         findViewById<SignInButton>(R.id.btn_login_google).setOnClickListener {
             startActivityForResult(googleSignInClient.signInIntent, RC_GOOGLE)
         }
-
-        findViewById<Button>(R.id.btn_go_main).setOnClickListener {
-            if (auth.currentUser != null) goMain()
-            else Toast.makeText(this, "Primero inicia sesión", Toast.LENGTH_SHORT).show()
-        }
+        
     }
 
     private fun updateLayoutVisibility() {
