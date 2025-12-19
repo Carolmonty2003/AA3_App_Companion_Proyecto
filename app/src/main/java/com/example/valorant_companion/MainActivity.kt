@@ -9,7 +9,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
-import com.example.valorant_companion.com.example.valorant_companion.SettingsFragment
+import com.example.valorant_companion.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 

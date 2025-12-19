@@ -43,4 +43,13 @@
         android:layout_height="wrap_content"
         android:text="@string/SettingsApplyButton"
         android:layout_marginTop="16dp"/>
+
+    <CheckBox
+        android:id="@+id/cb_night_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/NightMode"
+        android:textSize="16sp" />
+
 </LinearLayout>

@@ -1,23 +1,46 @@
-package com.example.valorant_companion.com.example.valorant_companion
+package com.example.valorant_companion
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
-import com.example.valorant_companion.R
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
+
+    companion object {
+        private const val PREFS = "valorant_prefs"
+        private const val KEY_NIGHT = "night_mode"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val group = view.findViewById<RadioGroup>(R.id.lang_group)
         val apply = view.findViewById<Button>(R.id.btn_apply_lang)
+        val night = view.findViewById<CheckBox>(R.id.cb_night_mode)
 
-        // Idioma actual guardado por AppCompat (si está vacío => “Sistema”)
+        // --- NIGHT MODE (como en apuntes, pero guardando preferencia) ---
+        val prefs = requireContext().getSharedPreferences(PREFS, android.content.Context.MODE_PRIVATE)
+        night.isChecked = prefs.getBoolean(KEY_NIGHT, false)
+
+        night.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean(KEY_NIGHT, isChecked).apply()
+
+            AppCompatDelegate.setDefaultNightMode(
+                if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
+                else AppCompatDelegate.MODE_NIGHT_NO
+            )
+
+            // Reinicio “fuerte” (igual que haces con el idioma)
+            val act = requireActivity()
+            act.finish()
+            act.startActivity(act.intent)
+        }
+
+        // --- IDIOMA (lo que ya tenías) ---
         val currentTags = AppCompatDelegate.getApplicationLocales().toLanguageTags()
 
         when {
@@ -41,13 +64,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 androidx.core.os.LocaleListCompat.forLanguageTags(tag)
             }
 
-            androidx.appcompat.app.AppCompatDelegate.setApplicationLocales(locales)
+            AppCompatDelegate.setApplicationLocales(locales)
 
-            // Reinicio “fuerte” (más fiable que recreate a veces)
             val act = requireActivity()
             act.finish()
             act.startActivity(act.intent)
         }
-
     }
 }

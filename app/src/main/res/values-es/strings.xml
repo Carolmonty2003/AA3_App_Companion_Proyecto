@@ -22,4 +22,5 @@
     <string name="EsTextLenguage">Español</string>
     <string name="CatTextLenguage">Catalán</string>
     <string name="SettingsApplyButton">Ajustes Aplicar</string>
+    <string name="NightMode">Modo nocturno</string>
 </resources>
