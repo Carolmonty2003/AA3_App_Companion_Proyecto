@@ -18,4 +18,11 @@
     <string name="SignOutTextButton">Desconectar</string>
     <string name="NameDefaultText">Nombre</string>
     <string name="CancelTextButton">Cancelar</string>
+    <string name="EnTextLenguage">Ingles</string>
+    <string name="EsTextLenguage">Español</string>
+    <string name="CatTextLenguage">Catalán</string>
+    <string name="SettingsApplyButton">Ajustes Aplicar</string>
+    <string name="NightMode">Modo nocturno</string>
+    <string name="LenguageText">Idioma</string>
+    <string name="ActiveDesactText">Activar/Desactivar</string>
 </resources>
