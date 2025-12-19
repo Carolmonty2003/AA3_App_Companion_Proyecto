@@ -9,7 +9,6 @@ import com.google.android.material.appbar.MaterialToolbar
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
-import com.example.valorant_companion.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,19 +31,19 @@ class MainActivity : AppCompatActivity() {
         fun select(tabId: Int) {
             when (tabId) {
                 R.id.nav_maps -> {
-                    toolbarTitle.setText(R.string.mapsTitle)
+                    toolbarTitle.setText(R.string.MapsTitle)
                     replaceFragment(MapsFragment())
                 }
                 R.id.nav_agents -> {
-                    toolbarTitle.setText(R.string.agentsTitle)
+                    toolbarTitle.setText(R.string.AgentsTitle)
                     replaceFragment(AgentsFragment())
                 }
                 R.id.nav_events -> {
-                    toolbarTitle.setText(R.string.eventsTitle)
+                    toolbarTitle.setText(R.string.EventsTitle)
                     replaceFragment(EventsFragment())
                 }
                 R.id.nav_chat -> {
-                    toolbarTitle.setText(R.string.chatTitle)
+                    toolbarTitle.setText(R.string.ChatTitle)
                     val name = intent.getStringExtra("USER_NAME")
                     replaceFragment(ChatFragment.newInstance(name))
                 }
@@ -82,13 +81,13 @@ class MainActivity : AppCompatActivity() {
                 val name = intent.getStringExtra("USER_NAME")
                 val image = intent.getStringExtra("USER_IMAGE")
 
-                findViewById<TextView>(R.id.toolbar_title).setText(R.string.profileTitle)
+                findViewById<TextView>(R.id.toolbar_title).setText(R.string.ProfileTitle)
                 replaceFragment(ProfileFragment.newInstance(name, image), addToBackStack = true)
                 true
             }
             R.id.settings -> {
                 // Cambia título del toolbar (si lo gestionas con TextView)
-                findViewById<TextView>(R.id.toolbar_title).text = getString(R.string.settingsTitle)
+                findViewById<TextView>(R.id.toolbar_title).text = getString(R.string.SettingsTitle)
 
                 replaceFragment(SettingsFragment(), addToBackStack = true)
                 true

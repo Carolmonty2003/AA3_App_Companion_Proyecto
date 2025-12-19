@@ -28,7 +28,7 @@
             android:id="@+id/ic_logo_splash"
             android:layout_width="wrap_content"
             android:layout_height="266dp"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/App_name"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_logo" />
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:backgroundTint="?attr/colorOutline"
-            android:hint="@string/mailDefaultText"
+            android:hint="@string/MailDefaultText"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textColor="?attr/colorOnSurface"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:backgroundTint="?attr/colorSecondary"
-            android:text="@string/registerTextButton" />
+            android:text="@string/createAccountText" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btn_login_google"
