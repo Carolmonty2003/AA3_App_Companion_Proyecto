@@ -27,10 +27,12 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
                 .replace(
                     R.id.fragment_container,
                     EventDetailFragment.newInstance(
-                        eventId = event.uuid ?: "",
-                        displayName = event.displayName ?: "",
-                        displayIcon = event.displayIcon ?: ""
-                    )
+                            eventId = event.uuid ?: "",
+                            displayName = event.displayName ?: "",
+                            displayIcon = event.displayIcon ?: "",
+                            startTime = event.startTime,
+                            endTime = event.endTime
+                        )
                 )
                 .addToBackStack(null)
                 .commit()

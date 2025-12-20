@@ -25,6 +25,17 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+    <!-- Datas del evento -->
+    <TextView
+        android:id="@+id/event_dates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:text="Dates" />
+
     <!-- Splash / loading  -->
     <include
         android:id="@+id/detail_loading_splash"
