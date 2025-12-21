@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- layout de un item de evento para el RecyclerView -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,25 +12,26 @@
     app:cardUseCompatPadding="false"
     app:cardPreventCornerOverlap="true"
     app:strokeWidth="0dp"
-    app:cardBackgroundColor="@color/redPers">>
+    app:cardBackgroundColor="@color/redPers">
 
+    <!-- contenedor principal del item -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- imagen del evento si la API la proporciona -->
         <ImageView
             android:id="@+id/item_event_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
-        <!-- overlay oscuro -->
+        <!-- nombre del evento -->
         <TextView
             android:id="@+id/item_event_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="90dp"
-            android:background="#66000000"
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="26sp"

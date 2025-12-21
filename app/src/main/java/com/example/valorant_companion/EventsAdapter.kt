@@ -10,11 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.valorant_companion.utils.SimpleImageLoader
 
+// adapter encargado de gestionar la lista de eventos en el RecyclerView
 class EventsAdapter(
     private var items: List<ValorantEvent>,
     private val onClick: (ValorantEvent) -> Unit
 ) : RecyclerView.Adapter<EventsAdapter.EventViewHolder>() {
 
+    // actualiza la lista de eventos y refresca la vista
     fun submit(newItems: List<ValorantEvent>) {
         items = newItems
         notifyDataSetChanged()
@@ -29,7 +31,7 @@ class EventsAdapter(
 
         return EventViewHolder(view)
     }
-
+    // asocia los datos de un evento con su ViewHolder
     override fun onBindViewHolder(
         holder: EventViewHolder,
         position: Int
@@ -44,6 +46,7 @@ class EventsAdapter(
         private val image: ImageView = view.findViewById(R.id.item_event_img)
         private val name: TextView = view.findViewById(R.id.item_event_name)
 
+        // rellena el item con los datos del evento
         fun bind(event: ValorantEvent, onClick: (ValorantEvent) -> Unit) {
             name.text = event.displayName ?: "Unknown"
 
@@ -60,7 +63,7 @@ class EventsAdapter(
 
             } else {
                 // No hay imagen
-                image.setImageDrawable(null) // MUY IMPORTANTE
+                image.setImageDrawable(null)
                 itemView.setBackgroundColor(
                     itemView.context.getColor(R.color.redPers)
                 )
@@ -69,6 +72,7 @@ class EventsAdapter(
                 name.setBackgroundColor(Color.TRANSPARENT)
             }
 
+            // listener de click para navegar al detalle del evento
             itemView.setOnClickListener { onClick(event) }
         }
     }

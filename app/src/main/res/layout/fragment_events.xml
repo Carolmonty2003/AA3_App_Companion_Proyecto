@@ -4,12 +4,16 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <!-- lista eventos scroll auto -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/events_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false" />
 
+    <!-- splash loading -->
     <include
         android:id="@+id/events_loading_splash"
         layout="@layout/activity_splashscreen"

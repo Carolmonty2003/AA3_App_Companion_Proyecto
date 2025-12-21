@@ -12,6 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+//muestra la lista de eventos
 class EventsFragment : Fragment(R.layout.fragment_events) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,8 +23,10 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
         val recycler = view.findViewById<RecyclerView>(R.id.events_recycler)
         val splashLoading = view.findViewById<View>(R.id.events_loading_splash)
 
+        // RecyclerView con layout vertical
         recycler.layoutManager = LinearLayoutManager(requireContext())
 
+        // adapter con callback para ir al detalle del evento
         val adapter = EventsAdapter(emptyList()) { event ->
             parentFragmentManager.beginTransaction()
                 .replace(
@@ -41,13 +44,14 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
         }
         recycler.adapter = adapter
 
-        // Splash al empezar
+        // splash al empezar
         splashLoading.visibility = View.VISIBLE
         recycler.visibility = View.GONE
 
+        // medición del tiempo de llamada a la API
         val apiStartMs = SystemClock.elapsedRealtime()
 
-        // Llamada a EVENTS
+        // llamada a API events
         ValorantApiInstance.api.getEvents().enqueue(object : Callback<ValorantEventsResponse> {
 
             override fun onResponse(
@@ -67,6 +71,7 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
                     }
                     ?: emptyList()
 
+                // actualizamos la lista
                 adapter.submit(events)
 
                 splashLoading.visibility = View.GONE
