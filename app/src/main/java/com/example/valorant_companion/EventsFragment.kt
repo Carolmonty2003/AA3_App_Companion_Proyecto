@@ -17,6 +17,8 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().title = getString(R.string.EventsTitle)
+
         val recycler = view.findViewById<RecyclerView>(R.id.events_recycler)
         val splashLoading = view.findViewById<View>(R.id.events_loading_splash)
 

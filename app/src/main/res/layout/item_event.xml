@@ -9,7 +9,8 @@
     app:cardCornerRadius="7dp"
     app:cardUseCompatPadding="false"
     app:cardPreventCornerOverlap="true"
-    app:strokeWidth="0dp">
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/redPers">>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -22,11 +23,6 @@
             android:scaleType="centerCrop" />
 
         <!-- overlay oscuro -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#66000000" />
-
         <TextView
             android:id="@+id/item_event_name"
             android:layout_width="match_parent"

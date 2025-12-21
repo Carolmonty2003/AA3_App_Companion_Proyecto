@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "310814606778",
+    "firebase_url": "https://aa3appcompanionvalorant-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "aa3appcompanionvalorant",
     "storage_bucket": "aa3appcompanionvalorant.firebasestorage.app"
   },
@@ -12,7 +13,28 @@
           "package_name": "com.example.valorant_companion"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "310814606778-0j1khlapjrdmn5uv3g3rs1h2ajrf2mgb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.valorant_companion",
+            "certificate_hash": "76cd42ab2a0ece1616feed85687568a127de1cfe"
+          }
+        },
+        {
+          "client_id": "310814606778-vhtrj9f68sph4gj0ki2ids97ju2nngrd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.valorant_companion",
+            "certificate_hash": "a270c21f4b1ff76bc65af521c5e0daa6753cf1c7"
+          }
+        },
+        {
+          "client_id": "310814606778-9l743rkti6f3eq78h75aai6uaj94fvu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDujQXzYXcD7Fm0uL-g9ygXoIZlNB61VmE"
@@ -20,7 +42,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310814606778-9l743rkti6f3eq78h75aai6uaj94fvu7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
