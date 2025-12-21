@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -23,6 +24,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var emailField: EditText
     private lateinit var passwordField: EditText
     private lateinit var auth: FirebaseAuth
+
+    // 👇 para mostrar/ocultar
+    private lateinit var mainLoginLayout: View
+    private lateinit var fragmentContainer: FragmentContainerView
 
     companion object {
         private const val RC_GOOGLE = 9001
@@ -40,6 +45,14 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
+        // refs UI
+        mainLoginLayout = findViewById(R.id.main_login_layout)
+        fragmentContainer = findViewById(R.id.fragment_container_view)
+
+        // Listener para enseñar/ocultar según backstack (como en clase)
+        supportFragmentManager.addOnBackStackChangedListener { updateLayoutVisibility() }
+        updateLayoutVisibility()
+
         emailField = findViewById(R.id.input_email)
         passwordField = findViewById(R.id.input_password)
 
@@ -56,14 +69,24 @@ class LoginActivity : AppCompatActivity() {
         findViewById<SignInButton>(R.id.btn_login_google).setOnClickListener {
             startActivityForResult(googleSignInClient.signInIntent, RC_GOOGLE)
         }
+        
+    }
 
-        // googleSignInClient.signOut()
+    private fun updateLayoutVisibility() {
+        val showingFragment = supportFragmentManager.backStackEntryCount > 0
+        fragmentContainer.visibility = if (showingFragment) View.VISIBLE else View.GONE
+        mainLoginLayout.visibility = if (showingFragment) View.GONE else View.VISIBLE
+    }
 
-        // botón temporal:
-        findViewById<Button>(R.id.btn_go_main).setOnClickListener {
-            if (auth.currentUser != null) goMain()
-            else Toast.makeText(this, "Primero inicia sesión", Toast.LENGTH_SHORT).show()
-        }
+    private fun loadRegisterFragment() {
+        // (opcional pero ayuda) lo mostramos ya, y el listener remata
+        fragmentContainer.visibility = View.VISIBLE
+        mainLoginLayout.visibility = View.GONE
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, RegisterFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun loginEmail() {
@@ -87,11 +110,8 @@ class LoginActivity : AppCompatActivity() {
 
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    goMain()
-                } else {
-                    Toast.makeText(this, "Google/Firebase error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
-                }
+                if (task.isSuccessful) goMain()
+                else Toast.makeText(this, "Google/Firebase error: ${task.exception?.message}", Toast.LENGTH_LONG).show()
             }
     }
 
@@ -113,12 +133,5 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Google sign-in failed", Toast.LENGTH_LONG).show()
             }
         }
-    }
-
-    private fun loadRegisterFragment() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, RegisterFragment())
-            .addToBackStack(null)
-            .commit()
     }
 }

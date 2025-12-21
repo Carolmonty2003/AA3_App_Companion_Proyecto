@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBluePers"
+    android:background="?attr/colorOnBackground"
     tools:context=".LoginActivity">
 
 
@@ -28,7 +28,7 @@
             android:id="@+id/ic_logo_splash"
             android:layout_width="wrap_content"
             android:layout_height="266dp"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/App_name"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_logo" />
 
@@ -37,36 +37,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Email"
+            android:backgroundTint="?attr/colorOutline"
+            android:hint="@string/MailDefaultText"
             android:inputType="textEmailAddress"
             android:padding="10dp"
-            android:textColorHint="@color/white" />
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurface" />
 
         <EditText
             android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:hint="Password"
+            android:backgroundTint="?attr/colorOutline"
+            android:hint="@string/passwordDefaultText"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:textColorHint="@color/white" />
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurface" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
-            android:backgroundTint="@color/darkRedPers"
-            android:text="Login" />
+            android:backgroundTint="?attr/colorSecondary"
+            android:text="@string/loginTextButton" />
 
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/darkRedPers"
-            android:text="Register" />
+            android:backgroundTint="?attr/colorSecondary"
+            android:text="@string/createAccountText" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/btn_login_google"
@@ -74,14 +78,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
-        <Button
-            android:id="@+id/btn_go_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="@color/bluePers"
-            android:text="Go to Main (TEMP)"
-            android:textColor="@color/white"/>
     </LinearLayout>
 
 </RelativeLayout>

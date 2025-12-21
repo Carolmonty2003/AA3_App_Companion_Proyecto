@@ -1,7 +1,43 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Valorant_Companion" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Marca (en night subimos un pelín el azul para que contraste mejor) -->
+        <item name="colorPrimary">@color/lightBluePers</item>
+        <item name="colorOnPrimary">@color/extraLightGreyPers</item>
+        <item name="colorPrimaryContainer">@color/bluePers</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+
+        <!-- Acento Valorant (rojo) -->
+        <item name="colorSecondary">@color/darkRedPers</item>
+        <item name="colorOnSecondary">@color/extraLightGreyPers</item>
+
+        <item name="colorSecondaryContainer">@color/redPers</item>
+        <item name="colorOnSecondaryContainer">@color/bluePers</item>
+
+        <!-- EXTRA (si Material lo usa) -->
+        <item name="colorTertiary">@color/lightBluePers</item>
+        <item name="colorOnTertiary">@color/extraLightGreyPers</item>
+
+        <!-- Fondo / superficies (más “nocturno”) -->
+        <item name="colorOnBackground">@color/bluePers</item>
+
+        <item name="colorSurface">@color/bluePers</item>
+        <item name="colorOnSurface">@color/extraLightGreyPers</item>
+
+        <!-- Errores -->
+        <item name="colorError">@color/darkRedPers</item>
+        <item name="colorOnError">@color/white</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/bluePers</item>
+        <item name="android:navigationBarColor">@color/bluePers</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="ThemeOverlay.Valorant.ToolbarPopup" parent="ThemeOverlay.Material3">
+        <item name="android:popupBackground">@color/lightBluePers</item>
+        <item name="android:textColorPrimary">@color/extraLightGreyPers</item>
+        <item name="android:textColorSecondary">@color/extraLightGreyPers</item>
+        <item name="colorControlNormal">@color/extraLightGreyPers</item>
     </style>
 </resources>

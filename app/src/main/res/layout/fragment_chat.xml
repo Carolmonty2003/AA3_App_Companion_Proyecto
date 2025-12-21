@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
-        android:background="@color/darkBluePers"
+        android:background="?attr/colorOnBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="10dp">
@@ -33,10 +33,10 @@
             android:layout_height="38dp"
             android:layout_weight="1"
             android:background="@drawable/bg_chat_input"
-            android:hint="Message..."
+            android:hint="@string/MessagesDefaultText"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/darkBluePers"
-            android:textColorHint="@color/darkBluePers" />
+            android:textColor="?attr/colorOnSecondaryContainer"
+            android:textColorHint="?attr/colorOnSecondaryContainer" />
 
         <ImageButton
             android:id="@+id/chat_send"
@@ -45,10 +45,10 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="@null"
-            android:src="@drawable/ic_send"
+            android:contentDescription="Send"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:contentDescription="Send" />
+            android:src="@drawable/ic_send" />
 
     </LinearLayout>
 

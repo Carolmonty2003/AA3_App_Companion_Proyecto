@@ -5,7 +5,7 @@
     android:id="@+id/splashScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBluePers"
+    android:background="?attr/colorOnBackground"
     android:orientation="vertical"
     tools:context=".SplashScreenActivity">
 
@@ -15,16 +15,16 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scaleType="centerInside"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/App_name"
         app:srcCompat="@drawable/ic_logo" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="@string/app_version"
+        android:text="@string/App_version"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="24sp"
         android:textStyle="bold" />
 

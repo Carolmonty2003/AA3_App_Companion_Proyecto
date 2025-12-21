@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBluePers"
+    android:background="?attr/colorOnBackground"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp"
@@ -16,7 +16,7 @@
         android:layout_marginBottom="32dp"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardElevation="0dp"
-        app:strokeColor="@color/darkRedPers"
+        app:strokeColor="?attr/colorSecondary"
         app:strokeWidth="2dp">
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -34,46 +34,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="Nombre de Usuario"
+        android:hint="@string/nameDefaultText"
         android:inputType="textPersonName"
         android:padding="10dp"
-        android:textColorHint="@color/white"/>
+        android:textColor="?attr/colorOnPrimary"
+        android:textColorHint="?attr/colorOnPrimary"
+        android:backgroundTint="?attr/colorOnPrimary"/>
 
     <EditText
         android:id="@+id/input_register_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:hint="Email"
+        android:hint="@string/MailDefaultText"
         android:inputType="textEmailAddress"
         android:padding="10dp"
-        android:textColorHint="@color/white"/>
+        android:textColor="?attr/colorOnPrimary"
+        android:textColorHint="?attr/colorOnPrimary"
+        android:backgroundTint="?attr/colorOnPrimary"/>
 
     <EditText
         android:id="@+id/input_register_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:hint="Contraseña"
+        android:hint="@string/passwordDefaultText"
         android:inputType="textPassword"
         android:padding="10dp"
-        android:textColorHint="@color/white"/>
+        android:textColor="?attr/colorOnPrimary"
+        android:textColorHint="?attr/colorOnPrimary"
+        android:backgroundTint="?attr/colorOnPrimary"/>
 
     <Button
         android:id="@+id/btn_fragment_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/darkRedPers"
-        android:text="Registrarse"
-        android:textColor="#FFFFFF" />
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/registerTextButton"
+        android:textColor="?attr/colorOnPrimary" />
 
     <Button
         android:id="@+id/btn_fragment_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/darkRedPers"
-        android:text="Cancelar"
-        android:textColor="#FFFFFF" />
+        android:backgroundTint="?attr/colorSecondary"
+        android:text="@string/cancelTextButton"
+        android:textColor="?attr/colorOnPrimary" />
 
 </LinearLayout>
