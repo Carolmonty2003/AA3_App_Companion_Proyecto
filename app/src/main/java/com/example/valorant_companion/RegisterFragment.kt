@@ -18,6 +18,18 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 
+/*
+ * Fragment encargado del registro "custom" (email + password + username + foto).
+ * - Crea el usuario con FirebaseAuth (email/password).
+ * - Guarda "username" y "foto" SOLO a nivel de app (se pasan por Intent a MainActivity),
+ *   no se guardan como displayName en Firebase.
+ * - Registra en Firebase Analytics el tiempo que el usuario tarda en completar el registro.
+ *
+ * NOTA (IA):
+ * - El selector de imagen con ActivityResultContracts.GetContent suele no estar explicado
+ *   en apuntes básicos (depende del profe).
+ * - Medir tiempo con SystemClock.elapsedRealtime() + evento "register_time" es una mejora.
+ */
 class RegisterFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
@@ -30,6 +42,12 @@ class RegisterFragment : Fragment() {
     private lateinit var analytics: FirebaseAnalytics
     private var registerStartMs: Long = 0L
 
+    /*
+     * Launcher para abrir el selector de contenido (galería) y obtener una imagen.
+     * Cuando el usuario elige una imagen:
+     * - Guardas su Uri en selectedImageUri
+     * - La muestras en profileImage
+     */
     private val selectImageLauncher: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
@@ -38,6 +56,20 @@ class RegisterFragment : Fragment() {
             }
         }
 
+    /*
+     * Infla el layout del registro y prepara toda la lógica de UI:
+     * - Inicializa FirebaseAuth y FirebaseAnalytics
+     * - Conecta los EditText / ImageView
+     * - Arranca el cronómetro para medir cuánto tarda el usuario en registrarse
+     * - Listener para seleccionar imagen (click en profileImage)
+     * - Botón registrar -> registerUser()
+     * - Botón cancelar -> vuelve atrás (popBackStack)
+     *
+     * @param {LayoutInflater} inflater - Inflador del layout XML.
+     * @param {ViewGroup?} container - Contenedor del fragment.
+     * @param {Bundle?} savedInstanceState - Estado guardado.
+     * @returns {View} Vista inflada del fragment.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +87,6 @@ class RegisterFragment : Fragment() {
         analytics = FirebaseAnalytics.getInstance(requireContext())
         registerStartMs = SystemClock.elapsedRealtime()
 
-
         view.findViewById<Button>(R.id.btn_fragment_register).setOnClickListener { registerUser() }
 
         view.findViewById<Button>(R.id.btn_fragment_cancel).setOnClickListener {
@@ -65,6 +96,20 @@ class RegisterFragment : Fragment() {
         return view
     }
 
+    /*
+     * Hace el registro de usuario con Firebase Auth (email + password).
+     * Flujo:
+     * 1) Lee campos (email, password, username).
+     * 2) Valida que no estén vacíos.
+     * 3) createUserWithEmailAndPassword(...)
+     *    - Si OK: abre MainActivity pasando extras USER_NAME y USER_IMAGE.
+     *    - Registra en Analytics un evento "register_time" con:
+     *        - duration_ms: tiempo total desde que se abrió el fragment
+     *        - picked_image: si el usuario eligió foto o no
+     *    - Cierra la activity actual (finish) para que no se pueda volver atrás.
+     *    - Si error: log + toast con el mensaje.
+     *
+     */
     private fun registerUser() {
         val email = emailField.text.toString()
         val password = passwordField.text.toString()
@@ -85,6 +130,7 @@ class RegisterFragment : Fragment() {
                         putExtra("USER_IMAGE", selectedImageUri?.toString() ?: "")
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     })
+
                     val durationMs = SystemClock.elapsedRealtime() - registerStartMs
 
                     val params = Bundle().apply {

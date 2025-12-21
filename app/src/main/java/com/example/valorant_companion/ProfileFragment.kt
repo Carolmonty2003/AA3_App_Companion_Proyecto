@@ -24,6 +24,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
 
+    /*
+     * Inicializa la pantalla de Profile:
+     * - Conecta las vistas (TextView e ImageView).
+     * - Inicializa FirebaseAuth y GoogleSignInClient.
+     * - Decide el nombre e imagen final a mostrar combinando:
+     *   arguments -> firebaseUser -> googleAccount -> fallback.
+     * - Carga la imagen según el tipo de URL (content/file o http).
+     *
+     * @param {View} view - Vista raíz del fragment ya inflada.
+     * @param {Bundle?} savedInstanceState - Estado guardado (rotación, recreación).
+     * @returns {Unit} No devuelve nada.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -32,25 +44,54 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         auth = FirebaseAuth.getInstance()
 
+        /*
+         * Configuración de Google Sign-In para poder hacer signOut correctamente.
+         * Aquí solo se pide el email (requestEmail).
+         *
+         * @returns {Unit}
+         */
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
+        // Botón de cerrar sesión
         view.findViewById<Button>(R.id.signOutButton).setOnClickListener { signOut() }
 
+        // Datos que pueden venir desde MainActivity al abrir Profile desde el menú
         val nameArg = arguments?.getString(ARG_USER_NAME)
         val imageArg = arguments?.getString(ARG_USER_IMAGE)
 
+        // Usuario actual de Firebase (custom register / login)
         val firebaseUser = auth.currentUser
+
+        // Cuenta de Google si el login fue con Google
         val googleAccount = GoogleSignIn.getLastSignedInAccount(requireContext())
 
+        /*
+         * Decide el nombre final:
+         * - Prioriza argumentos (si los pasas desde MainActivity),
+         * - si no, intenta displayName/email del usuario de Firebase,
+         * - si no, displayName de Google,
+         * - si no, "Player".
+         *
+         * @returns {Unit}
+         */
         val finalName = nameArg
             ?: firebaseUser?.displayName
             ?: firebaseUser?.email
             ?: googleAccount?.displayName
             ?: "Player"
 
+        /*
+         * Decide la imagen final:
+         * - Prioriza argumentos,
+         * - si no, photoUrl de Firebase,
+         * - si no, photoUrl de Google,
+         * - si no, vacío.
+         *
+         * @returns {Unit}
+         */
         val finalImage = imageArg
             ?: firebaseUser?.photoUrl?.toString()
             ?: googleAccount?.photoUrl?.toString()
@@ -60,6 +101,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         val defaultImageResId = R.drawable.ic_launcher_foreground
 
+        /*
+         * Carga la imagen según el origen:
+         * - Si no hay imagen -> icono por defecto.
+         * - Si es URI local (content:// o file://) -> setImageURI.
+         * - Si es URL remota (http/https) -> se descarga en un Thread.
+         *
+         * @returns {Unit}
+         */
         if (finalImage.isBlank()) {
             profileImage.setImageResource(defaultImageResId)
         } else if (finalImage.startsWith("content://") || finalImage.startsWith("file://")) {
@@ -69,6 +118,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
+    /*
+     * Cierra sesión del usuario y vuelve al Login limpiando la pila de pantallas.
+     * - auth.signOut() cierra Firebase
+     * - googleSignInClient.signOut() cierra Google
+     * - Flags NEW_TASK + CLEAR_TASK evitan volver atrás a MainActivity con el botón back.
+     *
+     * @returns {Unit} No devuelve nada.
+     */
     private fun signOut() {
         auth.signOut()
         googleSignInClient.signOut()
@@ -80,6 +137,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         activity?.finish()
     }
 
+    /*
+     * Descarga una imagen desde una URL y la pinta en el ImageView.
+     * Lo hace en un Thread para no bloquear la UI, y luego actualiza la UI con runOnUiThread.
+     *
+     * IMPORTANTE:
+     * - isAdded evita crasheos si el fragment ya no está “attached” cuando termina la descarga.
+     * - fallbackResId se usa si falla la conexión/descarga.
+     *
+     * @param {String} urlString - URL remota (http/https) de la imagen.
+     * @param {Int} fallbackResId - Recurso drawable por defecto si falla.
+     * @returns {Unit} No devuelve nada.
+     */
     private fun loadImage(urlString: String, fallbackResId: Int) {
         Thread {
             try {
@@ -111,6 +180,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         private const val ARG_USER_NAME = "USER_NAME"
         private const val ARG_USER_IMAGE = "USER_IMAGE"
 
+        /*
+         * Constructor recomendado para crear el ProfileFragment con argumentos.
+         * Evita usar setters y mantiene el patrón de Bundle para fragments.
+         *
+         * @param {String?} userName - Nombre del usuario a mostrar (si lo pasas desde MainActivity).
+         * @param {String?} userImage - Imagen del usuario a mostrar (si la pasas desde MainActivity).
+         * @returns {ProfileFragment} Fragment listo para usarse con arguments.
+         */
         fun newInstance(userName: String?, userImage: String?) = ProfileFragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_USER_NAME, userName)
