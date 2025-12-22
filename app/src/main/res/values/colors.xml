@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="darkBluePers">#0F1921</color>
+    <color name="bluePers">#233C4C</color>
+    <color name="lightBluePers">#3C677F</color>
+    <color name="darkRedPers">#FF4357</color>
+    <color name="redPers">#FF7186</color>
+    <color name="lightRedPers">#FFB6C4</color>
+    <color name="greyPers">#282828</color>
+    <color name="lightGreyPers">#505050</color>
+    <color name="extraLightGreyPers">#EBEBEB</color>
+    <color name="DefenderColorSquare">#5C9C8F</color>
+    <color name="AttackerColorSquare">#A06D76</color>
+    <color name="SpikeColorSquare">#D7A38E</color>
+    <color name="DefenderBarrierColorSquare">#2EE7B8</color>
+    <color name="AttackerBarrierColorSquare">#FF3B3B</color>
+</resources>

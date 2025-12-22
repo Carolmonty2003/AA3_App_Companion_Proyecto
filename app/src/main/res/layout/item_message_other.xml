@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="start"
+    android:paddingVertical="6dp">
+
+    <!--
+    Nombre del jugador encima del mensaje.
+    -->
+    <TextView
+        android:id="@+id/msg_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/msg_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="260dp"
+        android:background="@drawable/bg_bubble_other"
+        android:padding="12dp"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="14sp"/>
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorOnBackground"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:text="@string/SettingsTitle"
+        android:textAlignment="center"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!-- Texto night mode -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/nightMode"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Activa y desactiva el night mode -->
+    <CheckBox
+        android:id="@+id/cb_night_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/activeDesactText"
+        android:textColor="?attr/colorOnPrimary"
+        android:layout_marginBottom="18dp"
+        android:textSize="16sp" />
+
+    <!-- Texto Localizacion -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:text="@string/lenguageText"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Lista cambio de idioma
+         (IA): uso de Radio group -->
+    <RadioGroup
+        android:id="@+id/lang_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/lang_en"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/en_TextLenguage"
+            android:textColor="?attr/colorOnPrimary" />
+
+        <RadioButton
+            android:id="@+id/lang_es"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/es_TextLenguage"
+            android:textColor="?attr/colorOnPrimary" />
+
+        <RadioButton
+            android:id="@+id/lang_cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cat_TextLenguage"
+            android:textColor="?attr/colorOnPrimary" />
+    </RadioGroup>
+
+    <!-- Boton de aplicar cambios -->
+    <Button
+        android:id="@+id/btn_apply_lang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/settingsApplyButton"
+        android:backgroundTint="?attr/colorSecondary"/>
+
+    <!-- Otro trxto control de voide -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/App_version"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

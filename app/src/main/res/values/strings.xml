@@ -1,0 +1,32 @@
+<resources>
+    <string name="App_name" translatable="false">Valorant_Companion</string>
+    <string name="App_version" translatable="false">V1</string>
+    <string name="MailDefaultText" translatable="false">Email</string>
+    <string name="passwordDefaultText">Password</string>
+    <string name="loginTextButton">Login</string>
+    <string name="registerTextButton">Register</string>
+    <string name="MapsTitle">Maps</string>
+    <string name="AgentsTitle">Agents</string>
+    <string name="EventsTitle">Events</string>
+    <string name="ChatTitle" translatable="false">Chat</string>
+    <string name="ProfileTitle">Profile</string>
+    <string name="SettingsTitle">Settings</string>
+    <string name="MessagesDefaultText">Message...</string>
+    <string name="MapLegendText">Map Legend</string>
+    <string name="defenderText">Defenders Buy Zone</string>
+    <string name="attackerText">Attackers Buy Zone</string>
+    <string name="spikeText">Spike Plant Zone</string>
+    <string name="defenderBText">Defenders Spawn Barrier</string>
+    <string name="attackersBText">Attackers Spawn Barrier</string>
+    <string name="signOutTextButton">Sign Out</string>
+    <string name="nameDefaultText">Name</string>
+    <string name="cancelTextButton">Cancel</string>
+    <string name="en_TextLenguage">English</string>
+    <string name="es_TextLenguage">Spanish</string>
+    <string name="cat_TextLenguage">Catalán</string>
+    <string name="settingsApplyButton">Settings Apply</string>
+    <string name="nightMode">Night Mode</string>
+    <string name="lenguageText">Lenguage</string>
+    <string name="activeDesactText">Set Active/Desactive</string>
+    <string name="createAccountText">Create an Account</string>
+</resources>

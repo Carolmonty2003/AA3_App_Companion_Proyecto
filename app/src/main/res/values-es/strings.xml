@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="passwordDefaultText">Contraseña</string>
+    <string name="loginTextButton">Inicio de sesión</string>
+    <string name="registerTextButton">Registro</string>
+    <string name="MapsTitle">Mapas</string>
+    <string name="AgentsTitle">Agentes</string>
+    <string name="EventsTitle">Eventos</string>
+    <string name="ProfileTitle">Perfil</string>
+    <string name="SettingsTitle">Ajustes</string>
+    <string name="MessagesDefaultText">Mensaje...</string>
+    <string name="MapLegendText">Leyenda del mapa</string>
+    <string name="defenderText">Zona de compra de defensores</string>
+    <string name="attackerText">Zona de compra de atacantes</string>
+    <string name="spikeText">Zona de plantas de espiga</string>
+    <string name="defenderBText">Los defensores generan barrera</string>
+    <string name="attackersBText">Los atacantes generan una barrera</string>
+    <string name="signOutTextButton">Desconectar</string>
+    <string name="nameDefaultText">Nombre</string>
+    <string name="cancelTextButton">Cancelar</string>
+    <string name="en_TextLenguage">Ingles</string>
+    <string name="es_TextLenguage">Español</string>
+    <string name="cat_TextLenguage">Catalán</string>
+    <string name="settingsApplyButton">Ajustes Aplicar</string>
+    <string name="nightMode">Modo nocturno</string>
+    <string name="lenguageText">Idioma</string>
+    <string name="activeDesactText">Activar/Desactivar</string>
+    <string name="createAccountText">Crear una cuenta</string>
+</resources>
