@@ -1,16 +1,29 @@
 package ValorantApi
 
+/**
+ * Respuesta del endpoint de MAPS.
+ * - status: código de estado lógico de la API
+ * - data: lista de mapas
+ */
 data class ValorantMapsResponse(
     val status: Int,
     val data: List<ValorantMap>
 )
 
+/**
+ * Modelo de un mapa.
+ * Campos principales que usas en UI:
+ * - displayName: nombre del mapa
+ * - listViewIcon: imagen del item en la lista (RecyclerView)
+ * - splash: imagen fondo del detalle
+ * - displayIcon: imagen grande del mapa dentro del detalle
+ */
 data class ValorantMap(
     val uuid: String?,
-    val displayName: String?,     // <- nombre del mapa
-    val listViewIcon: String?,    // <- imagen de la lista
-    val splash: String?,          // <- fondo del detalle
-    val displayIcon: String?      // <- imagen del minimapa grande en detalle
+    val displayName: String?,
+    val listViewIcon: String?,
+    val splash: String?,
+    val displayIcon: String?
 )
 
 data class ValorantAgentsResponse(
@@ -18,10 +31,12 @@ data class ValorantAgentsResponse(
     val data: List<ValorantAgent>
 )
 
+
 data class ValorantAgentDetailResponse(
     val status: Int,
     val data: ValorantAgent
 )
+
 
 data class ValorantAgent(
     val uuid: String?,

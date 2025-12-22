@@ -5,6 +5,9 @@
     android:gravity="start"
     android:paddingVertical="6dp">
 
+    <!--
+    Nombre del jugador encima del mensaje.
+    -->
     <TextView
         android:id="@+id/msg_user"
         android:layout_width="wrap_content"

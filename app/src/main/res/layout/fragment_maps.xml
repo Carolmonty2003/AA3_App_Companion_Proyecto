@@ -2,7 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
+    <!--
+          RecyclerView que muestra la lista de mapas en forma de scroll vertical.
+        -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/maps_recycler"
         android:layout_width="match_parent"
@@ -10,6 +12,14 @@
         android:layout_marginTop="5dp"
         />
 
+    <!--
+      Splash/Loading overlay:
+      Se “superpone” encima del RecyclerView porque está debajo en el XML dentro del FrameLayout.
+      Se usa para mostrar una pantalla de carga mientras llega la respuesta de la API.
+
+      (IA probable):
+      Reutiliza el layout de la splash para que visualmente.
+    -->
     <include
         android:id="@+id/maps_loading_splash"
         layout="@layout/activity_splashscreen"
