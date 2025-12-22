@@ -9,6 +9,7 @@
     android:orientation="vertical"
     tools:context=".SplashScreenActivity">
 
+    <!-- Logo -->
     <ImageView
         android:id="@+id/ic_logo_splash"
         android:layout_width="match_parent"
@@ -18,6 +19,7 @@
         android:contentDescription="@string/App_name"
         app:srcCompat="@drawable/ic_logo" />
 
+    <!-- Texto Version -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

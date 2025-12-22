@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Imagrn de fondo(splash screen) -->
     <ImageView
         android:id="@+id/map_splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
+    <!-- Fondo dinamico -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,6 +22,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Titulo mapa -->
         <TextView
             android:id="@+id/map_name"
             android:layout_width="match_parent"
@@ -30,6 +33,7 @@
             android:gravity="center"
             android:paddingBottom="10dp"/>
 
+        <!-- Imagen mapa -->
         <ImageView
             android:id="@+id/map_display_icon"
             android:layout_width="match_parent"
@@ -37,7 +41,10 @@
             android:layout_weight="1"
             android:scaleType="fitCenter"/>
 
-        <!-- leyenda: la harás a mano -->
+        <!--
+          Leyenda (la hacéis “a mano” como dijisteis).
+        -->
+        -->
         <LinearLayout
             android:id="@+id/map_legend_container"
             android:layout_width="match_parent"

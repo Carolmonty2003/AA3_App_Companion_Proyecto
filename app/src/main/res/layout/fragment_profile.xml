@@ -21,6 +21,7 @@
         app:strokeColor="?attr/colorSecondary"
         app:strokeWidth="2dp">
 
+        <!-- Boton para ver perfil imagen del usuario -->
         <ImageView
             android:id="@+id/profileImage"
             android:layout_width="100dp"
@@ -28,6 +29,7 @@
             tools:srcCompat="@drawable/ic_launcher_foreground" />
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Texto nombre del usuario -->
     <TextView
         android:id="@+id/userName"
         android:layout_width="match_parent"
@@ -38,6 +40,7 @@
         android:textColor="?attr/colorOnPrimary"
         android:textColorLink="?attr/colorOnPrimary" />
 
+    <!-- Boton de Sign Out -->
     <Button
         android:id="@+id/signOutButton"
         android:layout_width="match_parent"
