@@ -29,16 +29,59 @@
             tools:srcCompat="@drawable/ic_launcher_foreground" />
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Texto nombre del usuario -->
-    <TextView
-        android:id="@+id/userName"
+    <LinearLayout
+        android:id="@+id/layout_name_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center">
+        <!-- Texto nombre del usuario -->
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnPrimary"
+            android:textColorLink="?attr/colorOnPrimary" />
+        <ImageButton
+            android:id="@+id/btn_edit_name"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_edit" />
+    </LinearLayout>
+
+    <!-- Editor oculto -->
+    <LinearLayout
+        android:id="@+id/layout_edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="?attr/colorOnPrimary"
-        android:textColorLink="?attr/colorOnPrimary" />
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/input_edit_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurface"
+            android:hint="@string/profile_edit_name_hint"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/btn_save_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/colorSecondary"
+            android:text="@string/profile_save_name" />
+    </LinearLayout>
+
 
     <!-- Boton de Sign Out -->
     <Button

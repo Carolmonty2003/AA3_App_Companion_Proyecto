@@ -21,6 +21,11 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     private var query: Query? = null
     private var listener: ChildEventListener? = null
 
+    // Nombre “live” (se actualiza si cambia en Firebase)
+    private var myNameLive: String = "Player"
+    private var nameListener: ValueEventListener? = null
+    private var userNameRef: DatabaseReference? = null
+
     /*
      * Se ejecuta cuando la vista del Fragment ya está creada.
      * Aquí se monta toda la pantalla de chat:
@@ -70,11 +75,12 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         val nameArg = arguments?.getString(ARG_USER_NAME)
         val googleAcc = GoogleSignIn.getLastSignedInAccount(requireContext())
 
-        val myName = nameArg
+        // Fallback inicial (si todavía no hay nombre en BD o falla)
+        myNameLive = nameArg
             ?: auth.currentUser?.displayName
-            ?: auth.currentUser?.email
-            ?: googleAcc?.displayName
-            ?: "Player"
+                    ?: auth.currentUser?.email
+                    ?: googleAcc?.displayName
+                    ?: "Player"
 
         adapter = ChatAdapter(messages, myUid)
 
@@ -97,6 +103,26 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         val databaseUrl = "https://aa3appcompanionvalorant-default-rtdb.europe-west1.firebasedatabase.app/"
         val database = FirebaseDatabase.getInstance(databaseUrl)
         dbRef = database.getReference("global_chat")
+
+        //escuchar el nombre del usuario en tiempo real desde users/<uid>/name
+        if (myUid != "anon") {
+            userNameRef = database.getReference("users").child(myUid).child("name")
+
+            nameListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val dbName = snapshot.getValue(String::class.java)
+                    if (!dbName.isNullOrBlank()) {
+                        myNameLive = dbName
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Si falla, nos quedamos con el fallback (myNameLive ya tiene valor)
+                }
+            }
+
+            userNameRef?.addValueEventListener(nameListener!!)
+        }
 
         // Limpia la lista antes de empezar a escuchar, para evitar duplicados si el Fragment se reconstruye.
         messages.clear()
@@ -147,7 +173,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
             val msg = ChatMessage(
                 uid = myUid,
-                name = myName,
+                name = myNameLive,
                 text = text,
                 timestamp = System.currentTimeMillis()
             )
@@ -173,6 +199,11 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         listener?.let { l -> query?.removeEventListener(l) }
         listener = null
         query = null
+
+        //desmontar listener del nombre para evitar fugas/duplicados
+        nameListener?.let { l -> userNameRef?.removeEventListener(l) }
+        nameListener = null
+        userNameRef = null
     }
 
     companion object {

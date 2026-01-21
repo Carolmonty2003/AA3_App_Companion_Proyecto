@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -16,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DatabaseReference
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
@@ -23,6 +27,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var profileImage: ImageView
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
+    private lateinit var userRef: DatabaseReference
 
     /*
      * Inicializa la pantalla de Profile:
@@ -39,10 +44,23 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        userName = view.findViewById(R.id.userName)
+        val userName = view.findViewById<TextView>(R.id.userName)
+        val btnEdit = view.findViewById<ImageButton>(R.id.btn_edit_name)
+        val layoutEdit = view.findViewById<View>(R.id.layout_edit_name)
+        val input = view.findViewById<EditText>(R.id.input_edit_name)
+        val btnSave = view.findViewById<Button>(R.id.btn_save_name)
         profileImage = view.findViewById(R.id.profileImage)
 
         auth = FirebaseAuth.getInstance()
+
+        val databaseUrl = "https://aa3appcompanionvalorant-default-rtdb.europe-west1.firebasedatabase.app/"
+        val db = FirebaseDatabase.getInstance(databaseUrl)
+
+        val uid = auth.currentUser?.uid
+        if (uid != null) {
+            userRef = db.getReference("users").child(uid)
+        }
+
 
         /*
          * Configuración de Google Sign-In para poder hacer signOut correctamente.
@@ -97,7 +115,49 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ?: googleAccount?.photoUrl?.toString()
             ?: ""
 
-        userName.text = finalName
+        val prefs = requireContext().getSharedPreferences("valorant_prefs", android.content.Context.MODE_PRIVATE)
+        val savedName = prefs.getString("profile_name", null)
+
+        // si el usuario ya guardó un nombre, manda ese por delante
+        val nameToShow = savedName ?: finalName
+        userName.text = nameToShow
+
+        // precargar el edit con el nombre actual
+        input.setText(userName.text.toString())
+
+        btnEdit.setOnClickListener {
+            // Pre-cargar con el nombre actual
+            input.setText(userName.text.toString())
+
+            // Mostrar editor
+            layoutEdit.visibility = View.VISIBLE
+            input.requestFocus()
+        }
+
+        btnSave.setOnClickListener {
+            val newName = input.text.toString().trim()
+            if (newName.isEmpty()) return@setOnClickListener
+
+            userName.text = newName
+            layoutEdit.visibility = View.GONE
+
+            if (uid != null) {
+                userRef.child("name").setValue(newName)
+            }
+        }
+
+
+        if (uid != null) {
+            userRef.child("name").get().addOnSuccessListener { snap ->
+                val dbName = snap.getValue(String::class.java)
+                userName.text = dbName ?: finalName
+            }.addOnFailureListener {
+                userName.text = finalName
+            }
+        } else {
+            userName.text = finalName
+        }
+
 
         val defaultImageResId = R.drawable.ic_launcher_foreground
 
