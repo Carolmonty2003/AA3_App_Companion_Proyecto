@@ -25,7 +25,8 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         /*
-         * Código de petición para distinguir el resultado del login de Google en onActivityResult.
+         * Código de petición para distinguir el resultado del login de Google en
+         * onActivityResult.
          */
         private const val RC_GOOGLE = 9001
     }

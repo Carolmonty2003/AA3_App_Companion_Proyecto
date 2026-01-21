@@ -13,4 +13,10 @@
         android:icon="@drawable/ic_settings"
         android:title="@string/SettingsTitle"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_exit"
+        android:title="@string/exitText"
+        app:showAsAction="never" />
+
 </menu>

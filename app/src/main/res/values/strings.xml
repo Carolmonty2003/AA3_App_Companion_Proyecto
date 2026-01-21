@@ -29,4 +29,5 @@
     <string name="lenguageText">Lenguage</string>
     <string name="activeDesactText">Set Active/Desactive</string>
     <string name="createAccountText">Create an Account</string>
+    <string name="exitText">Exit</string>
 </resources>

@@ -26,4 +26,5 @@
     <string name="lenguageText">Idioma</string>
     <string name="activeDesactText">Activar/Desactivar</string>
     <string name="createAccountText">Crear una cuenta</string>
+    <string name="exitText">Salir</string>
 </resources>
