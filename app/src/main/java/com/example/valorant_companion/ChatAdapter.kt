@@ -19,7 +19,8 @@ import androidx.recyclerview.widget.RecyclerView
 class ChatAdapter(
     private val messages: MutableList<ChatMessage>,
     private val myUid: String,
-    private var myAvatarIdLive: String = "default"
+    private var myAvatarIdLive: String = "default",
+    private var myNameLive: String = "Player"
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
@@ -112,6 +113,14 @@ class ChatAdapter(
             m.avatarId
         }
 
+        // si el mensaje es mío, usar el nombre ACTUAL
+        val nameToUse = if (!m.uid.isNullOrBlank() && m.uid == myUid) {
+            myNameLive
+        } else {
+            m.name ?: "Player"
+        }
+
+
         val avatarRes = when (avatarIdToUse) {
             "omen" -> R.drawable.avatar_omen
             "deadlock" -> R.drawable.avatar_deadlock
@@ -124,12 +133,12 @@ class ChatAdapter(
 
         when (holder) {
             is MeVH -> {
-                holder.user.text = name
+                holder.user.text = nameToUse
                 holder.text.text = text
                 holder.avatar.setImageResource(avatarRes)
             }
             is OtherVH -> {
-                holder.user.text = name
+                holder.user.text = nameToUse
                 holder.text.text = text
                 holder.avatar.setImageResource(avatarRes)
             }
@@ -162,4 +171,11 @@ class ChatAdapter(
         myAvatarIdLive = newAvatarId
         notifyDataSetChanged()
     }
+
+    //actualizar nombre actual del usuario y refrescar lista
+    fun updateMyName(newName: String) {
+        myNameLive = newName
+        notifyDataSetChanged()
+    }
+
 }

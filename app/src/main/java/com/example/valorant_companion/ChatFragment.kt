@@ -87,7 +87,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                     ?: googleAcc?.displayName
                     ?: "Player"
 
-        adapter = ChatAdapter(messages, myUid, myAvatarLive)
+        adapter = ChatAdapter(messages, myUid, myAvatarLive, myNameLive)
 
         /*
          * LayoutManager:
@@ -118,8 +118,12 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                     val dbName = snapshot.getValue(String::class.java)
                     if (!dbName.isNullOrBlank()) {
                         myNameLive = dbName
+
+                        //avisar al adapter para repintar tus mensajes antiguos
+                        adapter.updateMyName(myNameLive)
                     }
                 }
+
 
                 override fun onCancelled(error: DatabaseError) {
                     // Si falla, nos quedamos con el fallback (myNameLive ya tiene valor)
