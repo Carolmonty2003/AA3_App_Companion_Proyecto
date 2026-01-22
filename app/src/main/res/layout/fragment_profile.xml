@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:textColor="?attr/colorOnSurface"
             android:textColorHint="?attr/colorOnSurface"
-            android:hint="@string/profile_edit_name_hint"
+            android:hint="@string/profileEditNameHint"
             android:inputType="textPersonName" />
 
         <Button
@@ -79,7 +79,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="?attr/colorSecondary"
-            android:text="@string/profile_save_name" />
+            android:text="@string/profileSaveName" />
+    </LinearLayout>
+
+    <!-- Botón para abrir selector -->
+    <Button
+        android:id="@+id/btn_choose_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="@string/profileChangeAvatar" />
+
+    <!-- Panel selector (oculto por defecto) -->
+    <LinearLayout
+        android:id="@+id/layout_avatar_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_avatars"
+            android:layout_width="match_parent"
+            android:layout_height="240dp" />
+
+        <Button
+            android:id="@+id/btn_close_avatar_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cerrar" />
     </LinearLayout>
 
 

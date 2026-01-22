@@ -9,6 +9,7 @@ package com.example.valorant_companion
  */
 data class ChatMessage(
     var uid: String? = null,
+    val avatarId: String? = null,
     var name: String? = null,
     var text: String? = null,
     var timestamp: Long? = null
@@ -20,5 +21,5 @@ data class ChatMessage(
      *
      * (IA): Evita problemas en algunos casos y es compatible 100%.
      */
-    constructor() : this(null, null, null, null)
+    constructor() : this(null, null, null, null, null)
 }

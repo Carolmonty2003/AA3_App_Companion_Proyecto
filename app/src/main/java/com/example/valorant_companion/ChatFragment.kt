@@ -26,6 +26,11 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     private var nameListener: ValueEventListener? = null
     private var userNameRef: DatabaseReference? = null
 
+    // Avatar “live” (se actualiza si cambia en Firebase)
+    private var myAvatarLive: String = "default"
+    private var avatarListener: ValueEventListener? = null
+    private var userAvatarRef: DatabaseReference? = null
+
     /*
      * Se ejecuta cuando la vista del Fragment ya está creada.
      * Aquí se monta toda la pantalla de chat:
@@ -82,7 +87,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                     ?: googleAcc?.displayName
                     ?: "Player"
 
-        adapter = ChatAdapter(messages, myUid)
+        adapter = ChatAdapter(messages, myUid, myAvatarLive)
 
         /*
          * LayoutManager:
@@ -122,6 +127,27 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
             }
 
             userNameRef?.addValueEventListener(nameListener!!)
+        }
+
+        //escuchar el avatar del usuario en tiempo real desde users/<uid>/avatar
+        if (myUid != "anon") {
+            userAvatarRef = database.getReference("users").child(myUid).child("avatar")
+
+            avatarListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val dbAvatar = snapshot.getValue(String::class.java)
+                    myAvatarLive = if (!dbAvatar.isNullOrBlank()) dbAvatar else "default"
+
+                    //avisar al adapter para que tus mensajes (incluidos antiguos) se repinten
+                    adapter.updateMyAvatar(myAvatarLive)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Si falla, nos quedamos con el fallback (myAvatarLive ya tiene valor)
+                }
+            }
+
+            userAvatarRef?.addValueEventListener(avatarListener!!)
         }
 
         // Limpia la lista antes de empezar a escuchar, para evitar duplicados si el Fragment se reconstruye.
@@ -173,6 +199,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
             val msg = ChatMessage(
                 uid = myUid,
+                avatarId = myAvatarLive,   // <-- NUEVO: guarda el avatar elegido
                 name = myNameLive,
                 text = text,
                 timestamp = System.currentTimeMillis()
@@ -204,6 +231,11 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         nameListener?.let { l -> userNameRef?.removeEventListener(l) }
         nameListener = null
         userNameRef = null
+
+        //desmontar listener del avatar para evitar fugas/duplicados
+        avatarListener?.let { l -> userAvatarRef?.removeEventListener(l) }
+        avatarListener = null
+        userAvatarRef = null
     }
 
     companion object {

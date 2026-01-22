@@ -30,6 +30,7 @@
     <string name="activeDesactText">Set Active/Desactive</string>
     <string name="createAccountText">Create an Account</string>
     <string name="exitText">Exit</string>
-    <string name="profile_edit_name_hint">Edit the name</string>
-    <string name="profile_save_name">Save</string>
+    <string name="profileEditNameHint">Edit the name</string>
+    <string name="profileSaveName">Save</string>
+    <string name="profileChangeAvatar">Change Avatar</string>
 </resources>
