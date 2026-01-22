@@ -27,4 +27,7 @@
     <string name="activeDesactText">Activar/desactivar</string>
     <string name="createAccountText">Crea un compte</string>
     <string name="exitText">Sortir</string>
+    <string name="profileEditNameHint">Edita el nom</string>
+    <string name="profileSaveName">Guarda</string>
+    <string name="profileChangeAvatar">Canviar l\'avatar</string>
 </resources>
