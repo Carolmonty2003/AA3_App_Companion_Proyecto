@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    >
+    <ImageView
+        android:id="@+id/agents_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:id="@+id/agents_bg_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#88000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <!-- BARRA ROLES (iconos se cargarán desde la API) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="#2E6E8A">
+
+            <!-- ALL -->
+            <LinearLayout
+                android:id="@+id/btnAll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgAll"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_all_grid"
+                    android:scaleType="fitCenter" />
+
+
+                <View
+                    android:id="@+id/underlineAll"
+                    android:layout_width="36dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+            <!-- duelistas -->
+            <LinearLayout
+                android:id="@+id/btnDuelist"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgDuelist"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:contentDescription="Duelist" />
+
+                <View
+                    android:id="@+id/underlineDuelist"
+                    android:layout_width="36dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+            <!-- iniciadoes -->
+            <LinearLayout
+                android:id="@+id/btnInitiator"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgInitiator"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:contentDescription="Initiator" />
+
+                <View
+                    android:id="@+id/underlineInitiator"
+                    android:layout_width="36dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+            <!-- controladores -->
+            <LinearLayout
+                android:id="@+id/btnController"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgController"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:contentDescription="Controller" />
+
+                <View
+                    android:id="@+id/underlineController"
+                    android:layout_width="36dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+            <!-- centinelas -->
+            <LinearLayout
+                android:id="@+id/btnSentinel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgSentinel"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:contentDescription="Sentinel" />
+
+                <View
+                    android:id="@+id/underlineSentinel"
+                    android:layout_width="36dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/agents_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+
+    <include
+        android:id="@+id/agents_loading_splash"
+        layout="@layout/activity_splashscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
