@@ -30,4 +30,5 @@
     <string name="profileEditNameHint">Edita el nom</string>
     <string name="profileSaveName">Guarda</string>
     <string name="profileChangeAvatar">Canviar l\'avatar</string>
+    <string name="StatusTextCard">No hi ha manteniments ni incidències ara mateix.</string>
 </resources>

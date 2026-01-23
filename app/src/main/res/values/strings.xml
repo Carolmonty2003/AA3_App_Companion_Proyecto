@@ -33,4 +33,5 @@
     <string name="profileEditNameHint">Edit the name</string>
     <string name="profileSaveName">Save</string>
     <string name="profileChangeAvatar">Change Avatar</string>
+    <string name="StatusTextCard">There are no maintenance issues or incidents at the moment.</string>
 </resources>
