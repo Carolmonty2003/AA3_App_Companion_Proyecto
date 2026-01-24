@@ -1,0 +1,60 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Lista de mensajes del chat -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:layout_marginBottom="56dp"
+        android:padding="12dp"
+        android:background="@drawable/bg_chat"
+        android:alpha="0.8" />
+
+    <!-- Barra inferior fija del chat (como WhatsApp/Discord) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="?attr/colorOnBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <!-- Logo -->
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_logo" />
+
+        <!-- Input Chat -->
+        <EditText
+            android:id="@+id/chat_input"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_chat_input"
+            android:hint="@string/MessagesDefaultText"
+            android:paddingHorizontal="12dp"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            android:textColorHint="?attr/colorOnSecondaryContainer" />
+
+        <!-- Button Enviar -->
+        <ImageButton
+            android:id="@+id/chat_send"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@null"
+            android:contentDescription="Send"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_send" />
+
+    </LinearLayout>
+
+</FrameLayout>
