@@ -3,10 +3,12 @@ package com.example.valorant_companion
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,10 +24,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var emailField: EditText
     private lateinit var passwordField: EditText
     private lateinit var auth: FirebaseAuth
+    private lateinit var registerContainer: FragmentContainerView
+    private lateinit var loginLayout: View
 
     companion object {
         /*
-         * Código de petición para distinguir el resultado del login de Google en onActivityResult.
+         * Código de petición para distinguir el resultado del login de Google en
+         * onActivityResult.
          */
         private const val RC_GOOGLE = 9001
     }
@@ -57,11 +62,22 @@ class LoginActivity : AppCompatActivity() {
         emailField = findViewById(R.id.input_email)
         passwordField = findViewById(R.id.input_password)
 
+        registerContainer = findViewById(R.id.fragment_container_view)
+        loginLayout = findViewById(R.id.main_login_layout)
+
         // Login clásico email/password
         findViewById<Button>(R.id.btn_login).setOnClickListener { loginEmail() }
 
         // Carga el RegisterFragment dentro de la propia LoginActivity
         findViewById<Button>(R.id.btn_register).setOnClickListener { loadRegisterFragment() }
+
+        //cuando vuelves atrás (se vacía el backstack), restaurar login
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                registerContainer.visibility = View.GONE
+                loginLayout.visibility = View.VISIBLE
+            }
+        }
 
         //Configuración del login de Google.
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -184,6 +200,10 @@ class LoginActivity : AppCompatActivity() {
      * @returns {Unit}
      */
     private fun loadRegisterFragment() {
+        //mostrar contenedor y ocultar login
+        registerContainer.visibility = View.VISIBLE
+        loginLayout.visibility = View.GONE
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, RegisterFragment())
             .addToBackStack(null)

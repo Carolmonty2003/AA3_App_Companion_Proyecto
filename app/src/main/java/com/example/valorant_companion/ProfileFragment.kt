@@ -1,21 +1,22 @@
 package com.example.valorant_companion
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
@@ -23,6 +24,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var profileImage: ImageView
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
+    private lateinit var userRef: DatabaseReference
 
     /*
      * Inicializa la pantalla de Profile:
@@ -39,10 +41,23 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Conectar vistas (sin “sombras”)
         userName = view.findViewById(R.id.userName)
+        val btnEdit = view.findViewById<ImageButton>(R.id.btn_edit_name)
+        val layoutEdit = view.findViewById<View>(R.id.layout_edit_name)
+        val input = view.findViewById<EditText>(R.id.input_edit_name)
+        val btnSave = view.findViewById<Button>(R.id.btn_save_name)
         profileImage = view.findViewById(R.id.profileImage)
 
         auth = FirebaseAuth.getInstance()
+
+        val databaseUrl = "https://aa3appcompanionvalorant-default-rtdb.europe-west1.firebasedatabase.app/"
+        val db = FirebaseDatabase.getInstance(databaseUrl)
+
+        val uid = auth.currentUser?.uid
+        if (uid != null) {
+            userRef = db.getReference("users").child(uid)
+        }
 
         /*
          * Configuración de Google Sign-In para poder hacer signOut correctamente.
@@ -84,38 +99,93 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ?: "Player"
 
         /*
-         * Decide la imagen final:
-         * - Prioriza argumentos,
-         * - si no, photoUrl de Firebase,
-         * - si no, photoUrl de Google,
-         * - si no, vacío.
-         *
-         * @returns {Unit}
-         */
-        val finalImage = imageArg
-            ?: firebaseUser?.photoUrl?.toString()
-            ?: googleAccount?.photoUrl?.toString()
-            ?: ""
+        * Opciones para esocger de avatares para el perfil
+        */
+        val btnChoose = view.findViewById<Button>(R.id.btn_choose_avatar)
+        val btnClose = view.findViewById<Button>(R.id.btn_close_avatar_picker)
+        val pickerLayout = view.findViewById<View>(R.id.layout_avatar_picker)
+        val rv = view.findViewById<RecyclerView>(R.id.rv_avatars)
 
-        userName.text = finalName
+        val avatars = listOf(
+            AvatarItem("default", R.drawable.avatar_sage),
+            AvatarItem("omen", R.drawable.avatar_omen),
+            AvatarItem("deadlock", R.drawable.avatar_deadlock),
+            AvatarItem("viper", R.drawable.avatar_viper),
+            AvatarItem("clove", R.drawable.avatar_clove)
+        )
 
-        val defaultImageResId = R.drawable.ic_launcher_foreground
+        rv.layoutManager = GridLayoutManager(requireContext(), 4)
+        rv.adapter = AvatarAdapter(avatars) { selected ->
+            // 1) Actualiza UI al instante
+            profileImage.setImageResource(selected.drawableRes)
 
-        /*
-         * Carga la imagen según el origen:
-         * - Si no hay imagen -> icono por defecto.
-         * - Si es URI local (content:// o file://) -> setImageURI.
-         * - Si es URL remota (http/https) -> se descarga en un Thread.
-         *
-         * @returns {Unit}
-         */
-        if (finalImage.isBlank()) {
-            profileImage.setImageResource(defaultImageResId)
-        } else if (finalImage.startsWith("content://") || finalImage.startsWith("file://")) {
-            profileImage.setImageURI(Uri.parse(finalImage))
-        } else {
-            loadImage(finalImage, defaultImageResId)
+            // 2) Guarda en BD (users/<uid>/avatar = selected.id)
+            if (uid != null) {
+                userRef.child("avatar").setValue(selected.id)
+            }
+
+            // 3) Oculta selector
+            pickerLayout.visibility = View.GONE
         }
+
+        btnChoose.setOnClickListener { pickerLayout.visibility = View.VISIBLE }
+        btnClose.setOnClickListener { pickerLayout.visibility = View.GONE }
+
+        // --- Cargar avatar guardado (si existe) ---
+        if (uid != null) {
+            userRef.child("avatar").get().addOnSuccessListener { snap ->
+                val avatarId = snap.getValue(String::class.java) ?: "default"
+                val drawable = avatars.firstOrNull { it.id == avatarId }?.drawableRes ?: R.drawable.avatar_sage
+                profileImage.setImageResource(drawable)
+            }.addOnFailureListener {
+                profileImage.setImageResource(R.drawable.avatar_sage)
+            }
+        } else {
+            profileImage.setImageResource(R.drawable.avatar_sage)
+        }
+        // ----------------------------------------
+
+        // --- Nombre: leer de DB y mostrar (fallback finalName) ---
+        if (uid != null) {
+            userRef.child("name").get().addOnSuccessListener { snap ->
+                val dbName = snap.getValue(String::class.java)
+                userName.text = dbName ?: finalName
+                input.setText(userName.text.toString())
+            }.addOnFailureListener {
+                userName.text = finalName
+                input.setText(userName.text.toString())
+            }
+        } else {
+            userName.text = finalName
+            input.setText(userName.text.toString())
+        }
+        // ------------------------------------------------------
+
+        btnEdit.setOnClickListener {
+            // Pre-cargar con el nombre actual
+            input.setText(userName.text.toString())
+
+            // Mostrar editor
+            layoutEdit.visibility = View.VISIBLE
+            input.requestFocus()
+        }
+
+        btnSave.setOnClickListener {
+            val newName = input.text.toString().trim()
+            if (newName.isEmpty()) return@setOnClickListener
+
+            userName.text = newName
+            layoutEdit.visibility = View.GONE
+
+            if (uid != null) {
+                userRef.child("name").setValue(newName)
+            }
+        }
+
+        // NOTE:
+        // Si estás usando opción 1 (avatares locales), no usamos imageArg/finalImage remoto,
+        // porque podría pisar el avatar que el usuario eligió.
+        // Si quieres que "imageArg" tenga prioridad sobre avatar, dímelo y lo ajustamos.
     }
 
     /*
@@ -135,45 +205,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
         startActivity(intent)
         activity?.finish()
-    }
-
-    /*
-     * Descarga una imagen desde una URL y la pinta en el ImageView.
-     * Lo hace en un Thread para no bloquear la UI, y luego actualiza la UI con runOnUiThread.
-     *
-     * IMPORTANTE:
-     * - isAdded evita crasheos si el fragment ya no está “attached” cuando termina la descarga.
-     * - fallbackResId se usa si falla la conexión/descarga.
-     *
-     * @param {String} urlString - URL remota (http/https) de la imagen.
-     * @param {Int} fallbackResId - Recurso drawable por defecto si falla.
-     * @returns {Unit} No devuelve nada.
-     */
-    private fun loadImage(urlString: String, fallbackResId: Int) {
-        Thread {
-            try {
-                val url = URL(urlString)
-                val connection = url.openConnection() as HttpURLConnection
-                connection.doInput = true
-                connection.connect()
-
-                val input: InputStream = connection.inputStream
-                val bitmap = BitmapFactory.decodeStream(input)
-
-                if (isAdded) {
-                    requireActivity().runOnUiThread {
-                        profileImage.setImageBitmap(bitmap)
-                    }
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                if (isAdded) {
-                    requireActivity().runOnUiThread {
-                        profileImage.setImageResource(fallbackResId)
-                    }
-                }
-            }
-        }.start()
     }
 
     companion object {

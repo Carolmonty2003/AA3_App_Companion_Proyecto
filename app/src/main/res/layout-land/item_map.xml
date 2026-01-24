@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- layout de un item de evento para el RecyclerView -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -11,30 +9,42 @@
     app:cardCornerRadius="7dp"
     app:cardUseCompatPadding="false"
     app:cardPreventCornerOverlap="true"
-    app:strokeWidth="0dp"
-    app:cardBackgroundColor="@color/redPers">
+    app:strokeWidth="0dp">
 
-    <!-- contenedor principal del item -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- imagen del evento si la API la proporciona -->
+        <!--
+          Imagen del mapa para el listado (listViewIcon).
+        -->
         <ImageView
-            android:id="@+id/item_event_img"
+            android:id="@+id/item_map_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
-        <!-- nombre del evento -->
+        <!-- overlay oscuro -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#66000000" />
+
+        <!--
+         Nombre del mapa encima.
+         Truco visual: pones una “franja” oscura abajo usando:
+
+         textColor="?attr/colorOnPrimary": se adapta a día/noche.
+       -->
         <TextView
-            android:id="@+id/item_event_name"
+            android:id="@+id/item_map_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="90dp"
+            android:background="#66000000"
             android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="26sp"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
     </FrameLayout>

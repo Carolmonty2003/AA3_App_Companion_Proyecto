@@ -26,4 +26,9 @@
     <string name="lenguageText">Idioma</string>
     <string name="activeDesactText">Activar/Desactivar</string>
     <string name="createAccountText">Crear una cuenta</string>
+    <string name="exitText">Salir</string>
+    <string name="profileEditNameHint">Edita el nombre</string>
+    <string name="profileSaveName">Guardar</string>
+    <string name="profileChangeAvatar">Cambiar el avatar</string>
+    <string name="StatusTextCard">No hay mantenimientos ni incidencias ahora mismo.</string>
 </resources>

@@ -171,6 +171,11 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
+            R.id.action_exit -> {
+                finish()   // cerrar la app/activity
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

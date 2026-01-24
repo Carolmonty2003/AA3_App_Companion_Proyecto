@@ -3,6 +3,7 @@ package com.example.valorant_companion
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -17,8 +18,11 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class ChatAdapter(
     private val messages: MutableList<ChatMessage>,
-    private val myUid: String
+    private val myUid: String,
+    private var myAvatarIdLive: String = "default",
+    private var myNameLive: String = "Player"
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 
     /*
      * Constantes internas para distinguir el tipo de fila:
@@ -51,6 +55,7 @@ class ChatAdapter(
      *
      */
     class MeVH(v: View) : RecyclerView.ViewHolder(v) {
+        val avatar: ImageView = v.findViewById(R.id.avatar)
         val user: TextView = v.findViewById(R.id.msg_user)
         val text: TextView = v.findViewById(R.id.msg_text)
     }
@@ -62,6 +67,7 @@ class ChatAdapter(
      * Nota: es igual que el MeVH, pero se separa porque cada uno infla un layout distinto.
      */
     class OtherVH(v: View) : RecyclerView.ViewHolder(v) {
+        val avatar: ImageView = v.findViewById(R.id.avatar)
         val user: TextView = v.findViewById(R.id.msg_user)
         val text: TextView = v.findViewById(R.id.msg_text)
     }
@@ -100,14 +106,41 @@ class ChatAdapter(
         val name = m.name ?: "Player"
         val text = m.text ?: ""
 
+        // si mensaje es mío, usar el avatar ACTUAL (aunque el mensaje sea antiguo).
+        val avatarIdToUse = if (!m.uid.isNullOrBlank() && m.uid == myUid) {
+            myAvatarIdLive
+        } else {
+            m.avatarId
+        }
+
+        // si el mensaje es mío, usar el nombre ACTUAL
+        val nameToUse = if (!m.uid.isNullOrBlank() && m.uid == myUid) {
+            myNameLive
+        } else {
+            m.name ?: "Player"
+        }
+
+
+        val avatarRes = when (avatarIdToUse) {
+            "omen" -> R.drawable.avatar_omen
+            "deadlock" -> R.drawable.avatar_deadlock
+            "viper" -> R.drawable.avatar_viper
+            "clove" -> R.drawable.avatar_clove
+            "default" -> R.drawable.avatar_sage
+            null -> R.drawable.avatar_sage
+            else -> R.drawable.avatar_sage
+        }
+
         when (holder) {
             is MeVH -> {
-                holder.user.text = name
+                holder.user.text = nameToUse
                 holder.text.text = text
+                holder.avatar.setImageResource(avatarRes)
             }
             is OtherVH -> {
-                holder.user.text = name
+                holder.user.text = nameToUse
                 holder.text.text = text
+                holder.avatar.setImageResource(avatarRes)
             }
         }
     }
@@ -132,4 +165,17 @@ class ChatAdapter(
         messages.add(msg)
         notifyItemInserted(messages.size - 1)
     }
+
+    // actualizar avatar actual del usuario y refrescar lista
+    fun updateMyAvatar(newAvatarId: String) {
+        myAvatarIdLive = newAvatarId
+        notifyDataSetChanged()
+    }
+
+    //actualizar nombre actual del usuario y refrescar lista
+    fun updateMyName(newName: String) {
+        myNameLive = newName
+        notifyDataSetChanged()
+    }
+
 }
